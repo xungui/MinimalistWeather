@@ -7,7 +7,7 @@ import com.baronzhang.android.weather.model.db.dao.WeatherDao;
 import com.baronzhang.android.weather.model.db.entities.adapter.CloudWeatherAdapter;
 import com.baronzhang.android.weather.model.db.entities.minimalist.Weather;
 import com.baronzhang.android.weather.model.http.ApiClient;
-import com.baronzhang.android.weather.model.http.service.EnvironmentCloudWeatherService;
+import com.baronzhang.android.weather.model.http.EnvironmentCloudWeatherService;
 import com.baronzhang.android.weather.utils.NetworkUtils;
 
 import java.sql.SQLException;

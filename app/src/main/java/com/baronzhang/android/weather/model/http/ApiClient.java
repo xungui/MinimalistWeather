@@ -1,7 +1,6 @@
 package com.baronzhang.android.weather.model.http;
 
 import com.baronzhang.android.weather.BuildConfig;
-import com.baronzhang.android.weather.model.http.service.EnvironmentCloudWeatherService;
 import com.baronzhang.retrofit2.converter.FastJsonConverterFactory;
 
 import okhttp3.OkHttpClient;

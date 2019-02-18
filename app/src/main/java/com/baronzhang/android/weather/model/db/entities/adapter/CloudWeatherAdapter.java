@@ -1,6 +1,5 @@
 package com.baronzhang.android.weather.model.db.entities.adapter;
 
-import com.baronzhang.android.weather.utils.DateConvertUtils;
 import com.baronzhang.android.weather.model.db.entities.minimalist.AirQualityLive;
 import com.baronzhang.android.weather.model.db.entities.minimalist.LifeIndex;
 import com.baronzhang.android.weather.model.db.entities.minimalist.WeatherForecast;
@@ -8,6 +7,7 @@ import com.baronzhang.android.weather.model.db.entities.minimalist.WeatherLive;
 import com.baronzhang.android.weather.model.http.entity.EnvironmentCloudCityAirLive;
 import com.baronzhang.android.weather.model.http.entity.EnvironmentCloudForecast;
 import com.baronzhang.android.weather.model.http.entity.EnvironmentCloudWeatherLive;
+import com.baronzhang.android.weather.utils.DateConvertUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -179,19 +179,18 @@ public class CloudWeatherAdapter extends WeatherAdapter {
     private String getAqiQuality(int aqi) {
         if (aqi <= 50) {
             return "优";
-        } else if (aqi > 50 && aqi <= 100) {
+        } else if (aqi <= 100) {
             return "良";
-        } else if (aqi > 100 && aqi <= 150) {
+        } else if (aqi <= 150) {
             return "轻度污染";
-        } else if (aqi > 150 && aqi <= 200) {
+        } else if (aqi <= 200) {
             return "中度污染";
-        } else if (aqi > 200 && aqi <= 300) {
+        } else if (aqi <= 300) {
             return "重度污染";
-        } else if (aqi > 300 && aqi < 500) {
+        } else if (aqi < 500) {
             return "严重污染";
-        } else if (aqi >= 500) {
+        } else {
             return "污染爆表";
         }
-        return null;
     }
 }

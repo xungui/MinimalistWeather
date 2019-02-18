@@ -28,7 +28,6 @@ public class BaseFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
-//        fragmentLifecycleSubject.onNext(FragmentLifecycleEvent.DESTROY_VIEW);
         super.onDestroyView();
     }
 

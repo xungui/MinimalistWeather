@@ -1,4 +1,4 @@
-package com.baronzhang.android.weather.model.http.service;
+package com.baronzhang.android.weather.model.http;
 
 import com.baronzhang.android.weather.model.http.entity.EnvironmentCloudCityAirLive;
 import com.baronzhang.android.weather.model.http.entity.EnvironmentCloudForecast;

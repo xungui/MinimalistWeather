@@ -19,7 +19,7 @@ import rx.schedulers.Schedulers;
 /**
  * @author baronzhang (baron[dot]zhanglei[at]gmail[dot]com)
  */
-public class WelcomeActivity extends BaseActivity {
+public class SplashActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -22,12 +22,9 @@ import java.sql.SQLException;
  *         16/3/13
  */
 public final class WeatherDatabaseHelper extends OrmLiteSqliteOpenHelper {
-
     private static final String TAG = "WeatherDatabaseHelper";
-
     private static final String DATABASE_NAME = "weather.db";
     private static final int DATABASE_VERSION = 1;
-
     private static volatile WeatherDatabaseHelper instance;
 
     public WeatherDatabaseHelper(Context context) {
