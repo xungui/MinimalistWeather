@@ -2,7 +2,7 @@ package com.baronzhang.android.weather.di.component;
 
 import android.content.Context;
 
-import com.baronzhang.android.weather.WeatherApplication;
+import com.baronzhang.android.weather.main.WeatherApplication;
 import com.baronzhang.android.weather.di.module.ApplicationModule;
 
 import javax.inject.Singleton;
