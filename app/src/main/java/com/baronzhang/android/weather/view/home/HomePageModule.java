@@ -1,6 +1,7 @@
 package com.baronzhang.android.weather.view.home;
 
-import com.baronzhang.android.weather.di.scope.ActivityScoped;
+import com.baronzhang.android.weather.di.ActivityScoped;
+import com.baronzhang.android.weather.view.contract.HomePageContract;
 
 import dagger.Module;
 import dagger.Provides;
@@ -18,7 +19,6 @@ public class HomePageModule {
     private HomePageContract.View view;
 
     public HomePageModule(HomePageContract.View view) {
-
         this.view = view;
     }
 

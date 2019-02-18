@@ -6,9 +6,10 @@ import com.baronzhang.android.weather.model.db.dao.WeatherDao;
 import com.baronzhang.android.weather.model.db.entities.minimalist.Weather;
 import com.baronzhang.android.weather.model.preference.PreferenceHelper;
 import com.baronzhang.android.weather.model.preference.WeatherSettings;
-import com.baronzhang.android.weather.di.component.DaggerPresenterComponent;
-import com.baronzhang.android.weather.di.module.ApplicationModule;
-import com.baronzhang.android.weather.di.scope.ActivityScoped;
+import com.baronzhang.android.weather.di.DaggerPresenterComponent;
+import com.baronzhang.android.weather.di.ApplicationModule;
+import com.baronzhang.android.weather.di.ActivityScoped;
+import com.baronzhang.android.weather.view.contract.DrawerContract;
 
 import java.io.InvalidClassException;
 import java.sql.SQLException;

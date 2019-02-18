@@ -1,7 +1,6 @@
-package com.baronzhang.android.weather.view.home.drawer;
+package com.baronzhang.android.weather.view.contract;
 
-import com.baronzhang.android.weather.view.main.BasePresenter;
-import com.baronzhang.android.weather.view.main.BaseView;
+import com.baronzhang.android.weather.view.home.drawer.DrawerMenuPresenter;
 import com.baronzhang.android.weather.model.db.entities.minimalist.Weather;
 
 import java.io.InvalidClassException;

@@ -24,9 +24,7 @@ import javax.inject.Inject;
  *         16/3/14
  */
 public class WeatherDao {
-
     private Context context;
-
     private Dao<AirQualityLive, String> apiDaoOperation;
     private Dao<WeatherForecast, Long> forecastDaoOperation;
     private Dao<LifeIndex, Long> lifeIndexesDaoOperation;
@@ -35,7 +33,6 @@ public class WeatherDao {
 
     @Inject
     WeatherDao(Context context) {
-
         this.context = context;
         this.apiDaoOperation = WeatherDatabaseHelper.getInstance(context).getWeatherDao(AirQualityLive.class);
         this.forecastDaoOperation = WeatherDatabaseHelper.getInstance(context).getWeatherDao(WeatherForecast.class);
@@ -45,7 +42,6 @@ public class WeatherDao {
     }
 
     public Weather queryWeather(String cityId) throws SQLException {
-
         return TransactionManager.callInTransaction(WeatherDatabaseHelper.getInstance(context).getConnectionSource(), () -> {
             Weather weather = weatherDaoOperation.queryForId(cityId);
             if (weather != null) {
@@ -59,7 +55,6 @@ public class WeatherDao {
     }
 
     public void insertOrUpdateWeather(Weather weather) throws SQLException {
-
         TransactionManager.callInTransaction(WeatherDatabaseHelper.getInstance(context).getConnectionSource(), (Callable<Void>) () -> {
             if (weatherDaoOperation.idExists(weather.getCityId())) {
                 updateWeather(weather);
@@ -71,12 +66,10 @@ public class WeatherDao {
     }
 
     public void deleteById(String cityId) throws SQLException {
-
         weatherDaoOperation.deleteById(cityId);
     }
 
     private void delete(Weather data) throws SQLException {
-
         weatherDaoOperation.delete(data);
     }
 
@@ -87,9 +80,7 @@ public class WeatherDao {
      * @throws SQLException
      */
     public List<Weather> queryAllSaveCity() throws SQLException {
-
         return TransactionManager.callInTransaction(WeatherDatabaseHelper.getInstance(context).getConnectionSource(), () -> {
-
             List<Weather> weatherList = weatherDaoOperation.queryForAll();
             for (Weather weather : weatherList) {
                 String cityId = weather.getCityId();
@@ -103,7 +94,6 @@ public class WeatherDao {
     }
 
     private void insertWeather(Weather weather) throws SQLException {
-
         weatherDaoOperation.create(weather);
         apiDaoOperation.create(weather.getAirQualityLive());
         for (WeatherForecast weatherForecast : weather.getWeatherForecasts()) {
@@ -116,10 +106,8 @@ public class WeatherDao {
     }
 
     private void updateWeather(Weather weather) throws SQLException {
-
         weatherDaoOperation.update(weather);
         apiDaoOperation.update(weather.getAirQualityLive());
-
         //先删除旧数据
         DeleteBuilder<WeatherForecast, Long> forecastDeleteBuilder = forecastDaoOperation.deleteBuilder();
         forecastDeleteBuilder.where().eq(WeatherForecast.CITY_ID_FIELD_NAME, weather.getCityId());
@@ -129,7 +117,6 @@ public class WeatherDao {
         for (WeatherForecast weatherForecast : weather.getWeatherForecasts()) {
             forecastDaoOperation.create(weatherForecast);
         }
-
         //先删除旧数据
         DeleteBuilder<LifeIndex, Long> lifeIndexDeleteBuilder = lifeIndexesDaoOperation.deleteBuilder();
         lifeIndexDeleteBuilder.where().eq(LifeIndex.CITY_ID_FIELD_NAME, weather.getCityId());

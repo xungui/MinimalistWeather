@@ -39,11 +39,8 @@ import butterknife.ButterKnife;
  */
 public class MainActivity extends BaseActivity
         implements HomePageFragment.OnFragmentInteractionListener, DrawerMenuFragment.OnSelectCity {
-
-
     @BindView(R.id.refresh_layout)
     SmartRefreshLayout smartRefreshLayout;
-
     @BindView(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbarLayout;
     @BindView(R.id.toolbar)
@@ -62,7 +59,6 @@ public class MainActivity extends BaseActivity
     @Inject
     HomePagePresenter homePagePresenter;
     DrawerMenuPresenter drawerMenuPresenter;
-
     private String currentCityId;
 
     @Override
@@ -118,7 +114,7 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         assert drawer != null;
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -165,10 +161,8 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onSelect(String cityId) {
-
         assert drawerLayout != null;
         drawerLayout.closeDrawer(GravityCompat.START);
-
         new Handler().postDelayed(() -> homePagePresenter.loadWeather(cityId, false), 250);
     }
 }

@@ -1,4 +1,4 @@
-package com.baronzhang.android.weather.view.home;
+package com.baronzhang.android.weather.view.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -47,7 +47,6 @@ public class DetailAdapter extends BaseRecyclerViewAdapter<DetailAdapter.ViewHol
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-
         @BindView(R.id.detail_icon_image_view)
         ImageView detailIconImageView;
         @BindView(R.id.detail_key_text_view)

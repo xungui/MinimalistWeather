@@ -36,7 +36,6 @@ public final class WeatherDatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
-
         try {
             TableUtils.createTableIfNotExists(connectionSource, AirQualityLive.class);
             TableUtils.createTableIfNotExists(connectionSource, WeatherForecast.class);
@@ -62,7 +61,6 @@ public final class WeatherDatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
-
         onCreate(database, connectionSource);
     }
 
@@ -73,7 +71,6 @@ public final class WeatherDatabaseHelper extends OrmLiteSqliteOpenHelper {
      * @return instance
      */
     public static WeatherDatabaseHelper getInstance(Context context) {
-
         context = context.getApplicationContext();
         if (instance == null) {
             synchronized (WeatherDatabaseHelper.class) {

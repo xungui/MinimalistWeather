@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.baronzhang.android.weather.view.adapter.CityListAdapter;
+import com.baronzhang.android.weather.view.contract.SelectCityContract;
 import com.baronzhang.android.weather.view.main.BaseFragment;
 import com.baronzhang.android.weather.R;
 import com.baronzhang.android.weather.model.db.entities.City;

@@ -22,12 +22,9 @@ import java.sql.SQLException;
  *         16/3/13
  */
 public final class CityDatabaseHelper extends OrmLiteSqliteOpenHelper {
-
     private static final String TAG = "CityDatabaseHelper";
-
     private static final String DATABASE_NAME = "city.db";
     private static final int DATABASE_VERSION = 1;
-
     private static volatile CityDatabaseHelper instance;
 
     public CityDatabaseHelper(Context context) {
@@ -51,7 +48,6 @@ public final class CityDatabaseHelper extends OrmLiteSqliteOpenHelper {
      * @return instance
      */
     public static CityDatabaseHelper getInstance(Context context) {
-
         context = context.getApplicationContext();
         if (instance == null) {
             synchronized (CityDatabaseHelper.class) {

@@ -5,9 +5,9 @@ import com.baronzhang.android.weather.model.db.entities.minimalist.AirQualityLiv
 import com.baronzhang.android.weather.model.db.entities.minimalist.LifeIndex;
 import com.baronzhang.android.weather.model.db.entities.minimalist.WeatherForecast;
 import com.baronzhang.android.weather.model.db.entities.minimalist.WeatherLive;
-import com.baronzhang.android.weather.model.http.entity.envicloud.EnvironmentCloudCityAirLive;
-import com.baronzhang.android.weather.model.http.entity.envicloud.EnvironmentCloudForecast;
-import com.baronzhang.android.weather.model.http.entity.envicloud.EnvironmentCloudWeatherLive;
+import com.baronzhang.android.weather.model.http.entity.EnvironmentCloudCityAirLive;
+import com.baronzhang.android.weather.model.http.entity.EnvironmentCloudForecast;
+import com.baronzhang.android.weather.model.http.entity.EnvironmentCloudWeatherLive;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +17,13 @@ import java.util.List;
  * 2017/7/5
  */
 public class CloudWeatherAdapter extends WeatherAdapter {
-
     private EnvironmentCloudWeatherLive cloudWeatherLive;
     private EnvironmentCloudForecast cloudForecast;
     private EnvironmentCloudCityAirLive cloudCityAirLive;
 
     public CloudWeatherAdapter(EnvironmentCloudWeatherLive cloudWeatherLive,
-                               EnvironmentCloudForecast cloudForecast, EnvironmentCloudCityAirLive cloudCityAirLive) {
+                               EnvironmentCloudForecast cloudForecast,
+                               EnvironmentCloudCityAirLive cloudCityAirLive) {
         this.cloudWeatherLive = cloudWeatherLive;
         this.cloudForecast = cloudForecast;
         this.cloudCityAirLive = cloudCityAirLive;
@@ -46,7 +46,6 @@ public class CloudWeatherAdapter extends WeatherAdapter {
 
     @Override
     public WeatherLive getWeatherLive() {
-
         WeatherLive weatherLive = new WeatherLive();
         weatherLive.setAirPressure(cloudWeatherLive.getAirPressure());
         weatherLive.setCityId(cloudWeatherLive.getCityId());
@@ -66,11 +65,8 @@ public class CloudWeatherAdapter extends WeatherAdapter {
 
     @Override
     public List<WeatherForecast> getWeatherForecasts() {
-
         List<WeatherForecast> weatherForecasts = new ArrayList<>();
-
         for (EnvironmentCloudForecast.ForecastEntity forecastEntity : cloudForecast.getForecast()) {
-
             WeatherForecast weatherForecast = new WeatherForecast();
             weatherForecast.setWind(forecastEntity.getWind().getDir());
             weatherForecast.setCityId(getCityId());
@@ -99,11 +95,8 @@ public class CloudWeatherAdapter extends WeatherAdapter {
 
     @Override
     public List<LifeIndex> getLifeIndexes() {
-
         EnvironmentCloudForecast.SuggestionEntity suggestionEntity = cloudForecast.getSuggestion();
-
         List<LifeIndex> indexList = new ArrayList<>();
-
         LifeIndex index1 = new LifeIndex();
         index1.setCityId(cloudForecast.getCityId());
         index1.setName("空气质量");
@@ -184,7 +177,6 @@ public class CloudWeatherAdapter extends WeatherAdapter {
     }
 
     private String getAqiQuality(int aqi) {
-
         if (aqi <= 50) {
             return "优";
         } else if (aqi > 50 && aqi <= 100) {

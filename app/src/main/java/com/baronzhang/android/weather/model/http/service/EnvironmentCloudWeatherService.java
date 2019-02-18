@@ -1,8 +1,8 @@
 package com.baronzhang.android.weather.model.http.service;
 
-import com.baronzhang.android.weather.model.http.entity.envicloud.EnvironmentCloudCityAirLive;
-import com.baronzhang.android.weather.model.http.entity.envicloud.EnvironmentCloudForecast;
-import com.baronzhang.android.weather.model.http.entity.envicloud.EnvironmentCloudWeatherLive;
+import com.baronzhang.android.weather.model.http.entity.EnvironmentCloudCityAirLive;
+import com.baronzhang.android.weather.model.http.entity.EnvironmentCloudForecast;
+import com.baronzhang.android.weather.model.http.entity.EnvironmentCloudWeatherLive;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;

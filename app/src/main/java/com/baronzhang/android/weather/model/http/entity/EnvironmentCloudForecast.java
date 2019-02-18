@@ -1,4 +1,4 @@
-package com.baronzhang.android.weather.model.http.entity.envicloud;
+package com.baronzhang.android.weather.model.http.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
@@ -9,8 +9,6 @@ import java.util.List;
  *         2017/2/16
  */
 public class EnvironmentCloudForecast {
-
-
     /**
      * citycode : 101020100
      * rdesc : Success
@@ -19,7 +17,6 @@ public class EnvironmentCloudForecast {
      * rcode : 200
      * forecast : [{"pop":"0","date":"2017-02-16","uv":"5","vis":"10","hum":"74","astro":{"ss":"17:42","mr":"22:42","ms":"09:41","sr":"06:34"},"pres":"1020","pcpn":"0.0","tmp":{"min":"10","max":"19"},"cond":{"cond_d":"小雨","cond_n":"阴"},"wind":{"sc":"微风","spd":"4","deg":"204","dir":"南风"}},{"pop":"70","date":"2017-02-17","uv":"6","vis":"10","hum":"77","astro":{"ss":"17:43","mr":"23:35","ms":"10:15","sr":"06:33"},"pres":"1025","pcpn":"0.3","tmp":{"min":"6","max":"15"},"cond":{"cond_d":"小雨","cond_n":"小雨"},"wind":{"sc":"3-4","spd":"10","deg":"28","dir":"东北风"}},{"pop":"33","date":"2017-02-18","uv":"6","vis":"10","hum":"72","astro":{"ss":"17:43","mr":"null","ms":"10:52","sr":"06:32"},"pres":"1029","pcpn":"0.0","tmp":{"min":"6","max":"10"},"cond":{"cond_d":"多云","cond_n":"晴"},"wind":{"sc":"微风","spd":"6","deg":"75","dir":"东南风"}},{"pop":"0","date":"2017-02-19","uv":"5","vis":"10","hum":"78","astro":{"ss":"17:44","mr":"00:27","ms":"11:31","sr":"06:31"},"pres":"1019","pcpn":"0.0","tmp":{"min":"10","max":"16"},"cond":{"cond_d":"多云","cond_n":"多云"},"wind":{"sc":"微风","spd":"1","deg":"174","dir":"东南风"}},{"pop":"0","date":"2017-02-20","uv":"N/A","vis":"10","hum":"81","astro":{"ss":"17:45","mr":"01:19","ms":"12:12","sr":"06:30"},"pres":"1013","pcpn":"0.0","tmp":{"min":"10","max":"19"},"cond":{"cond_d":"多云","cond_n":"小雨"},"wind":{"sc":"3-4","spd":"14","deg":"168","dir":"东北风"}},{"pop":"71","date":"2017-02-21","uv":"N/A","vis":"9","hum":"83","astro":{"ss":"17:46","mr":"02:10","ms":"12:57","sr":"06:29"},"pres":"1012","pcpn":"4.9","tmp":{"min":"7","max":"14"},"cond":{"cond_d":"小雨","cond_n":"小雨"},"wind":{"sc":"微风","spd":"0","deg":"94","dir":"东南风"}},{"pop":"100","date":"2017-02-22","uv":"N/A","vis":"2","hum":"91","astro":{"ss":"17:47","mr":"03:00","ms":"13:46","sr":"06:28"},"pres":"1016","pcpn":"9.7","tmp":{"min":"2","max":"11"},"cond":{"cond_d":"小雨","cond_n":"中雨"},"wind":{"sc":"4-5","spd":"23","deg":"340","dir":"西北风"}}]
      */
-
 
     @JSONField(name = "rcode")
     private int requestCode;//结果吗

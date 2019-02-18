@@ -1,9 +1,8 @@
-package com.baronzhang.android.weather.di.component;
+package com.baronzhang.android.weather.di;
 
 import android.content.Context;
 
 import com.baronzhang.android.weather.main.WeatherApplication;
-import com.baronzhang.android.weather.di.module.ApplicationModule;
 
 import javax.inject.Singleton;
 

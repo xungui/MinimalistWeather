@@ -11,7 +11,6 @@ import com.j256.ormlite.table.DatabaseTable;
  */
 @DatabaseTable(tableName = "AirQuality")
 public class AirQualityLive {
-
     public static final String CITY_ID_FIELD_NAME = "cityId";
     public static final String AQI_FIELD_NAME = "aqi";
     public static final String PM25_FIELD_NAME = "pm25";

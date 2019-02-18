@@ -2,7 +2,6 @@ package com.baronzhang.android.weather.utils.stetho;
 
 import android.content.Context;
 
-import com.baronzhang.android.weather.utils.StethoHelper;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 

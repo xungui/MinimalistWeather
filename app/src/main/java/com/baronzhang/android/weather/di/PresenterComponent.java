@@ -1,6 +1,5 @@
-package com.baronzhang.android.weather.di.component;
+package com.baronzhang.android.weather.di;
 
-import com.baronzhang.android.weather.di.module.ApplicationModule;
 import com.baronzhang.android.weather.view.home.drawer.DrawerMenuPresenter;
 import com.baronzhang.android.weather.view.selectcity.SelectCityPresenter;
 

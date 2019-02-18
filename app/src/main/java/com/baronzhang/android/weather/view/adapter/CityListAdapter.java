@@ -1,4 +1,4 @@
-package com.baronzhang.android.weather.view.selectcity;
+package com.baronzhang.android.weather.view.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,9 +9,9 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.annimon.stream.Stream;
-import com.baronzhang.android.weather.view.main.BaseRecyclerViewAdapter;
 import com.baronzhang.android.weather.R;
 import com.baronzhang.android.weather.model.db.entities.City;
+import com.baronzhang.android.weather.view.main.BaseRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
 
 /**
  * @author baronzhang (baron[dot]zhanglei[at]gmail[dot]com)
- *         16/3/16
+ * 16/3/16
  */
 public class CityListAdapter extends BaseRecyclerViewAdapter<CityListAdapter.ViewHolder> implements Filterable {
     private List<City> cities;
@@ -91,7 +91,8 @@ public class CityListAdapter extends BaseRecyclerViewAdapter<CityListAdapter.Vie
                 ArrayList<City> newValues = new ArrayList<>();
                 Stream.of(cities)
                         .filter(city -> (city.getCityName().contains(prefixString)
-                                || city.getCityNameEn().contains(prefixString) || city.getParent().contains(prefixString)
+                                || city.getCityNameEn().contains(prefixString)
+                                || city.getParent().contains(prefixString)
                                 || city.getRoot().contains(prefixString)))
                         .forEach(newValues::add);
                 results.values = newValues;

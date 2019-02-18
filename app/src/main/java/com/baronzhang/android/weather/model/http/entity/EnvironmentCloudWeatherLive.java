@@ -1,4 +1,4 @@
-package com.baronzhang.android.weather.model.http.entity.envicloud;
+package com.baronzhang.android.weather.model.http.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
@@ -9,8 +9,6 @@ import com.alibaba.fastjson.annotation.JSONField;
  *         2017/2/16
  */
 public class EnvironmentCloudWeatherLive {
-
-
     /**
      * airpressure : 1016.0
      * rain : 0.0

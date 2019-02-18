@@ -8,9 +8,10 @@ import com.baronzhang.android.weather.model.db.dao.WeatherDao;
 import com.baronzhang.android.weather.model.preference.PreferenceHelper;
 import com.baronzhang.android.weather.model.preference.WeatherSettings;
 import com.baronzhang.android.weather.model.repository.WeatherDataRepository;
-import com.baronzhang.android.weather.di.component.DaggerPresenterComponent;
-import com.baronzhang.android.weather.di.module.ApplicationModule;
-import com.baronzhang.android.weather.di.scope.ActivityScoped;
+import com.baronzhang.android.weather.di.DaggerPresenterComponent;
+import com.baronzhang.android.weather.di.ApplicationModule;
+import com.baronzhang.android.weather.di.ActivityScoped;
+import com.baronzhang.android.weather.view.contract.HomePageContract;
 
 import javax.inject.Inject;
 
@@ -22,23 +23,18 @@ import rx.subscriptions.CompositeSubscription;
  */
 @ActivityScoped
 public final class HomePagePresenter implements HomePageContract.Presenter {
-
     private final Context context;
     private final HomePageContract.View weatherView;
-
     private CompositeSubscription subscriptions;
-
     @Inject
     WeatherDao weatherDao;
 
     @Inject
     HomePagePresenter(Context context, HomePageContract.View view) {
-
         this.context = context;
         this.weatherView = view;
         this.subscriptions = new CompositeSubscription();
         weatherView.setPresenter(this);
-
         DaggerPresenterComponent.builder()
                 .applicationModule(new ApplicationModule(context))
                 .build().inject(this);
@@ -52,7 +48,6 @@ public final class HomePagePresenter implements HomePageContract.Presenter {
 
     @Override
     public void loadWeather(String cityId, boolean refreshNow) {
-
         Subscription subscription = WeatherDataRepository.getWeather(context, cityId, weatherDao, refreshNow)
                 .compose(RxSchedulerUtils.normalSchedulersTransformer())
                 .subscribe(weatherView::displayWeatherInformation, throwable -> {

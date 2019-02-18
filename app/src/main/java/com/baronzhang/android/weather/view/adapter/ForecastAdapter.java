@@ -1,4 +1,4 @@
-package com.baronzhang.android.weather.view.home;
+package com.baronzhang.android.weather.view.adapter;
 
 import android.annotation.SuppressLint;
 import android.support.v7.widget.RecyclerView;
@@ -57,7 +57,6 @@ public class ForecastAdapter extends BaseRecyclerViewAdapter<ForecastAdapter.Vie
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-
         @BindView(R.id.week_text_view)
         TextView weekTextView;
         @BindView(R.id.date_text_view)

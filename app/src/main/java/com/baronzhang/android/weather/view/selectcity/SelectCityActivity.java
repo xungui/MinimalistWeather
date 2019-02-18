@@ -7,10 +7,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.baronzhang.android.weather.view.main.BaseActivity;
-import com.baronzhang.android.weather.utils.ActivityUtils;
 import com.baronzhang.android.weather.R;
 import com.baronzhang.android.weather.main.WeatherApplication;
+import com.baronzhang.android.weather.utils.ActivityUtils;
+import com.baronzhang.android.weather.view.main.BaseActivity;
 import com.jakewharton.rxbinding.support.v7.widget.RxSearchView;
 
 import java.util.concurrent.TimeUnit;

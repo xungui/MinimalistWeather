@@ -7,28 +7,22 @@ import java.util.List;
 
 /**
  * @author baronzhang (baron[dot]zhanglei[at]gmail[dot]com)
- *         16/2/25
+ * 16/2/25
  */
 @DatabaseTable(tableName = "Weather")
 public class Weather {
-
     public static final String CITY_ID_FIELD_NAME = "cityId";
     public static final String CITY_NAME_FIELD_NAME = "cityName";
     public static final String CITY_NAME_EN_FIELD_NAME = "cityNameEn";
-
     @DatabaseField(columnName = CITY_ID_FIELD_NAME, id = true)
     private String cityId;
     @DatabaseField(columnName = CITY_NAME_FIELD_NAME)
     private String cityName;
     @DatabaseField(columnName = CITY_NAME_EN_FIELD_NAME)
     private String cityNameEn;
-
     private WeatherLive weatherLive;
-
     private List<WeatherForecast> weatherForecasts;
-
     private AirQualityLive airQualityLive;
-
     private List<LifeIndex> lifeIndexes;
 
     public AirQualityLive getAirQualityLive() {

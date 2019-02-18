@@ -1,4 +1,4 @@
-package com.baronzhang.android.weather.view.home;
+package com.baronzhang.android.weather.view.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -25,7 +25,6 @@ import static com.baronzhang.android.weather.R.drawable.ic_index_sunscreen;
  *         2016/12/13
  */
 public class LifeIndexAdapter extends BaseRecyclerViewAdapter<LifeIndexAdapter.ViewHolder> {
-
     private Context context;
     private List<LifeIndex> indexList;
 
@@ -55,7 +54,6 @@ public class LifeIndexAdapter extends BaseRecyclerViewAdapter<LifeIndexAdapter.V
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-
         @BindView(R.id.index_icon_image_view)
         ImageView indexIconImageView;
         @BindView(R.id.index_level_text_view)
@@ -71,8 +69,6 @@ public class LifeIndexAdapter extends BaseRecyclerViewAdapter<LifeIndexAdapter.V
     }
 
     private Drawable getIndexDrawable(Context context, String indexName) {
-
-
         int colorResourceId = ic_index_sunscreen;
         if (indexName.contains("防晒")) {
             colorResourceId = ic_index_sunscreen;

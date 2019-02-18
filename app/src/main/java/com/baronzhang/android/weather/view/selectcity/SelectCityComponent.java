@@ -1,7 +1,7 @@
 package com.baronzhang.android.weather.view.selectcity;
 
-import com.baronzhang.android.weather.di.component.ApplicationComponent;
-import com.baronzhang.android.weather.di.scope.ActivityScoped;
+import com.baronzhang.android.weather.di.ApplicationComponent;
+import com.baronzhang.android.weather.di.ActivityScoped;
 
 import dagger.Component;
 

@@ -9,7 +9,6 @@ import com.j256.ormlite.table.DatabaseTable;
  */
 @DatabaseTable(tableName = "LifeIndex")
 public class LifeIndex {
-
     public static final String ID_FIELD_NAME = "_id";
     public static final String CITY_ID_FIELD_NAME = "cityId";
     public static final String NAME_ID_FIELD_NAME = "name";

@@ -5,7 +5,6 @@ package com.baronzhang.android.weather.model;
  *         2017/7/6
  */
 public class WeatherDetail {
-
     private int iconResourceId;
     private String key;
     private String value;

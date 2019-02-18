@@ -1,4 +1,4 @@
-package com.baronzhang.android.weather.di.scope;
+package com.baronzhang.android.weather.di;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;

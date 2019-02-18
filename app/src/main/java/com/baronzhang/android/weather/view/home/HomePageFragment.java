@@ -14,6 +14,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baronzhang.android.weather.view.adapter.DetailAdapter;
+import com.baronzhang.android.weather.view.adapter.ForecastAdapter;
+import com.baronzhang.android.weather.view.adapter.LifeIndexAdapter;
+import com.baronzhang.android.weather.view.contract.HomePageContract;
 import com.baronzhang.android.weather.view.main.BaseFragment;
 import com.baronzhang.android.weather.R;
 import com.baronzhang.android.weather.model.db.entities.minimalist.AirQualityLive;
@@ -42,25 +46,19 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
     TextView adviceTextView;
     @BindView(R.id.tv_city_rank)
     TextView cityRankTextView;
-
     //详细天气信息
     @BindView(R.id.detail_recycler_view)
     RecyclerView detailRecyclerView;
-
     //预报
     @BindView(R.id.forecast_recycler_view)
     RecyclerView forecastRecyclerView;
-
     //生活指数
     @BindView(R.id.life_index_recycler_view)
     RecyclerView lifeIndexRecyclerView;
 
     private OnFragmentInteractionListener onFragmentInteractionListener;
-
     private Unbinder unbinder;
-
     private Weather weather;
-
     private List<WeatherDetail> weatherDetails;
     private List<WeatherForecast> weatherForecasts;
     private List<LifeIndex> lifeIndices;
@@ -68,7 +66,6 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
     private DetailAdapter detailAdapter;
     private ForecastAdapter forecastAdapter;
     private LifeIndexAdapter lifeIndexAdapter;
-
     private HomePageContract.Presenter presenter;
 
     public HomePageFragment() {

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 
+import com.baronzhang.android.weather.view.contract.DrawerContract;
 import com.baronzhang.android.weather.view.main.BaseFragment;
 import com.baronzhang.android.weather.R;
 import com.baronzhang.android.weather.view.selectcity.SelectCityActivity;

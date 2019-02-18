@@ -1,4 +1,4 @@
-package com.baronzhang.android.weather.model.http.entity.envicloud;
+package com.baronzhang.android.weather.model.http.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
@@ -9,8 +9,6 @@ import com.alibaba.fastjson.annotation.JSONField;
  *         2017/2/16
  */
 public class EnvironmentCloudCityAirLive {
-
-
     /**
      * citycode : 101020100
      * PM25 : 33
@@ -25,7 +23,6 @@ public class EnvironmentCloudCityAirLive {
      * CO : 0.77
      * AQI : 46
      */
-
     @JSONField(name = "rcode")
     private int requestCode;//结果吗
 

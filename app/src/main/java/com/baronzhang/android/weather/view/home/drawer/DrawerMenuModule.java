@@ -1,6 +1,7 @@
 package com.baronzhang.android.weather.view.home.drawer;
 
-import com.baronzhang.android.weather.di.scope.ActivityScoped;
+import com.baronzhang.android.weather.di.ActivityScoped;
+import com.baronzhang.android.weather.view.contract.DrawerContract;
 
 import dagger.Module;
 import dagger.Provides;

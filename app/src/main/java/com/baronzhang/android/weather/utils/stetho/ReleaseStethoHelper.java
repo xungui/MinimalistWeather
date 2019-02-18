@@ -2,8 +2,6 @@ package com.baronzhang.android.weather.utils.stetho;
 
 import android.content.Context;
 
-import com.baronzhang.android.weather.utils.StethoHelper;
-
 import okhttp3.OkHttpClient;
 
 /**

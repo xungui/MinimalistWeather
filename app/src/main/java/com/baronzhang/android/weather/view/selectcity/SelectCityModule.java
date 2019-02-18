@@ -3,7 +3,8 @@ package com.baronzhang.android.weather.view.selectcity;
 import dagger.Module;
 import dagger.Provides;
 
-import com.baronzhang.android.weather.di.scope.ActivityScoped;
+import com.baronzhang.android.weather.di.ActivityScoped;
+import com.baronzhang.android.weather.view.contract.SelectCityContract;
 
 /**
  * @author baronzhang (baron[dot]zhanglei[at]gmail[dot]com)

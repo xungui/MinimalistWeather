@@ -3,17 +3,12 @@ package com.baronzhang.android.weather.model.repository;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.baronzhang.android.weather.utils.NetworkUtils;
 import com.baronzhang.android.weather.model.db.dao.WeatherDao;
 import com.baronzhang.android.weather.model.db.entities.adapter.CloudWeatherAdapter;
-import com.baronzhang.android.weather.model.db.entities.adapter.KnowWeatherAdapter;
-import com.baronzhang.android.weather.model.db.entities.adapter.MiWeatherAdapter;
 import com.baronzhang.android.weather.model.db.entities.minimalist.Weather;
 import com.baronzhang.android.weather.model.http.ApiClient;
-import com.baronzhang.android.weather.model.http.ApiConstants;
-import com.baronzhang.android.weather.model.http.entity.envicloud.EnvironmentCloudCityAirLive;
-import com.baronzhang.android.weather.model.http.entity.envicloud.EnvironmentCloudForecast;
-import com.baronzhang.android.weather.model.http.entity.envicloud.EnvironmentCloudWeatherLive;
+import com.baronzhang.android.weather.model.http.service.EnvironmentCloudWeatherService;
+import com.baronzhang.android.weather.utils.NetworkUtils;
 
 import java.sql.SQLException;
 
@@ -23,7 +18,7 @@ import rx.schedulers.Schedulers;
 
 /**
  * @author baronzhang (baron[dot]zhanglei[at]gmail[dot]com)
- *         2016/12/10
+ * 2016/12/10
  */
 public class WeatherDataRepository {
 
@@ -44,27 +39,12 @@ public class WeatherDataRepository {
             return observableForGetWeatherFromDB;
 
         //从服务端获取天气数据
-        Observable<Weather> observableForGetWeatherFromNetWork = null;
-        switch (ApiClient.configuration.getDataSourceType()) {
-            case ApiConstants.WEATHER_DATA_SOURCE_TYPE_KNOW:
-                observableForGetWeatherFromNetWork = ApiClient.weatherService.getKnowWeather(cityId)
-                        .map(knowWeather -> new KnowWeatherAdapter(knowWeather).getWeather());
-                break;
-            case ApiConstants.WEATHER_DATA_SOURCE_TYPE_MI:
-                observableForGetWeatherFromNetWork = ApiClient.weatherService.getMiWeather(cityId)
-                        .map(miWeather -> new MiWeatherAdapter(miWeather).getWeather());
-                break;
-            case ApiConstants.WEATHER_DATA_SOURCE_TYPE_ENVIRONMENT_CLOUD:
-
-                Observable<EnvironmentCloudWeatherLive> weatherLiveObservable = ApiClient.environmentCloudWeatherService.getWeatherLive(cityId);
-                Observable<EnvironmentCloudForecast> forecastObservable = ApiClient.environmentCloudWeatherService.getWeatherForecast(cityId);
-                Observable<EnvironmentCloudCityAirLive> airLiveObservable = ApiClient.environmentCloudWeatherService.getAirLive(cityId);
-
-                observableForGetWeatherFromNetWork = Observable.combineLatest(weatherLiveObservable, forecastObservable, airLiveObservable,
-                        (weatherLive, forecast, airLive) -> new CloudWeatherAdapter(weatherLive, forecast, airLive).getWeather());
-
-                break;
-        }
+        EnvironmentCloudWeatherService service = ApiClient.getService();
+        Observable<Weather> observableForGetWeatherFromNetWork = Observable.combineLatest(
+                service.getWeatherLive(cityId),
+                service.getWeatherForecast(cityId),
+                service.getAirLive(cityId),
+                (weatherLive, forecast, airLive) -> new CloudWeatherAdapter(weatherLive, forecast, airLive).getWeather());
         assert observableForGetWeatherFromNetWork != null;
         observableForGetWeatherFromNetWork = observableForGetWeatherFromNetWork.doOnNext(weather -> Schedulers.io().createWorker().schedule(() -> {
             try {

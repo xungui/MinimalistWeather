@@ -16,14 +16,11 @@ import java.util.Set;
 
 /**
  * @author baronzhang (baron[dot]zhanglei[at]gmail[dot]com)
- *         16/2/6
+ * 16/2/6
  */
 public final class PreferenceHelper {
-
     private static final String TAG = "Preferences";
-
     private static final String SETTINGS_FILENAME = WeatherApplication.class.getPackage().getName();
-
     private static final List<ConfigurationListener> CONFIGURATION_LISTENERS = Collections.synchronizedList(new ArrayList<>());
 
     private PreferenceHelper() {

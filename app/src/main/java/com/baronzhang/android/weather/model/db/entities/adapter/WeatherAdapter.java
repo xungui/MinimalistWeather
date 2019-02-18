@@ -29,7 +29,6 @@ public abstract class WeatherAdapter {
     public abstract AirQualityLive getAirQualityLive();
 
     public Weather getWeather() {
-
         Weather weather = new Weather();
         weather.setCityId(getCityId());
         weather.setCityName(getCityName());

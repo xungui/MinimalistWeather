@@ -8,7 +8,6 @@ import android.widget.AdapterView;
  *         16/4/15
  */
 public abstract class BaseRecyclerViewAdapter<T extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<T>{
-
     protected AdapterView.OnItemClickListener onItemClickListener;
 
     public void setOnItemClickListener(AdapterView.OnItemClickListener onItemClickListener) {

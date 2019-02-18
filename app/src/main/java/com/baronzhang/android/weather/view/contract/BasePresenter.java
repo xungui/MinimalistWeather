@@ -1,4 +1,4 @@
-package com.baronzhang.android.weather.view.main;
+package com.baronzhang.android.weather.view.contract;
 
 /**
  * presenter interface,所有Presenter必须实现此接口

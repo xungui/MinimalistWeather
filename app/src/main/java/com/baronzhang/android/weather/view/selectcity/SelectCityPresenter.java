@@ -3,9 +3,10 @@ package com.baronzhang.android.weather.view.selectcity;
 import android.content.Context;
 
 import com.baronzhang.android.weather.model.db.dao.CityDao;
-import com.baronzhang.android.weather.di.component.DaggerPresenterComponent;
-import com.baronzhang.android.weather.di.module.ApplicationModule;
-import com.baronzhang.android.weather.di.scope.ActivityScoped;
+import com.baronzhang.android.weather.di.DaggerPresenterComponent;
+import com.baronzhang.android.weather.di.ApplicationModule;
+import com.baronzhang.android.weather.di.ActivityScoped;
+import com.baronzhang.android.weather.view.contract.SelectCityContract;
 
 import javax.inject.Inject;
 
@@ -22,7 +23,6 @@ import rx.subscriptions.CompositeSubscription;
 public final class SelectCityPresenter implements SelectCityContract.Presenter {
     private final SelectCityContract.View cityListView;
     private CompositeSubscription subscriptions;
-
     @Inject
     CityDao cityDao;
 

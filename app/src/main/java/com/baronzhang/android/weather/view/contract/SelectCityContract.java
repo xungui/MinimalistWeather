@@ -1,10 +1,8 @@
-package com.baronzhang.android.weather.view.selectcity;
+package com.baronzhang.android.weather.view.contract;
 
 import java.util.List;
 
 import com.baronzhang.android.weather.model.db.entities.City;
-import com.baronzhang.android.weather.view.main.BasePresenter;
-import com.baronzhang.android.weather.view.main.BaseView;
 
 /**
  * @author baronzhang (baron[dot]zhanglei[at]gmail[dot]com)

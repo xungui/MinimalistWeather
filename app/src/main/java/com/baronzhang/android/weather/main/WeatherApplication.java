@@ -6,12 +6,9 @@ import android.os.StrictMode;
 import android.util.Log;
 
 import com.baronzhang.android.weather.BuildConfig;
-import com.baronzhang.android.weather.di.component.ApplicationComponent;
-import com.baronzhang.android.weather.di.component.DaggerApplicationComponent;
-import com.baronzhang.android.weather.di.module.ApplicationModule;
-import com.baronzhang.android.weather.model.http.ApiClient;
-import com.baronzhang.android.weather.model.http.ApiConstants;
-import com.baronzhang.android.weather.model.http.configuration.ApiConfiguration;
+import com.baronzhang.android.weather.di.ApplicationComponent;
+import com.baronzhang.android.weather.di.ApplicationModule;
+import com.baronzhang.android.weather.di.DaggerApplicationComponent;
 
 /**
  * @author baronzhang (baron[dot]zhanglei[at]gmail[dot]com)
@@ -20,10 +17,10 @@ import com.baronzhang.android.weather.model.http.configuration.ApiConfiguration;
 public class WeatherApplication extends Application {
     private static final String TAG = "WeatherApp";
     private ApplicationComponent applicationComponent;
-    private static WeatherApplication weatherApplicationInstance;
+    private static WeatherApplication application;
 
     public static WeatherApplication getInstance() {
-        return weatherApplicationInstance;
+        return application;
     }
 
     @Override
@@ -36,33 +33,22 @@ public class WeatherApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Log.d(TAG, "onCreate start");
+        application = this;
         if (BuildConfig.DEBUG) {
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());
             StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyLog().build());
         }
-
         applicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
                 .build();
 
         //初始化Stetho
-        BuildConfig.STETHO.init(this.getApplicationContext());
-
-        weatherApplicationInstance = this;
-
-        //初始化ApiClient
-        ApiConfiguration apiConfiguration = ApiConfiguration.builder()
-//                .dataSourceType(ApiConstants.WEATHER_DATA_SOURCE_TYPE_MI)
-//                .dataSourceType(ApiConstants.WEATHER_DATA_SOURCE_TYPE_KNOW)
-                .dataSourceType(ApiConstants.WEATHER_DATA_SOURCE_TYPE_ENVIRONMENT_CLOUD)
-                .build();
-        ApiClient.init(apiConfiguration);
+        BuildConfig.STETHO.init(getApplicationContext());
         Log.d(TAG, "onCreate end");
     }
 
 
     public ApplicationComponent getApplicationComponent() {
-
         return applicationComponent;
     }
 }
