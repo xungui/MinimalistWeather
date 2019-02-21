@@ -4,7 +4,7 @@ def retrofitVersion = "2.2.0"
 def okHttpVersion = "3.7.0"
 def stethoVersion = "1.5.0"
 def butterKnifeVersion = "8.8.1"
-def daggerVersion = "2.8"
+def daggerVersion = "2.20"
 def ormLiteVersion = "4.48"
 def fastJsonVersion = "1.1.60.android"
 
@@ -26,7 +26,7 @@ project.ext {
             "design"                      : "com.android.support:design:${supportVersion}",
             "recyclerview"                : "com.android.support:recyclerview-v7:${supportVersion}",
             "cardview"                    : "com.android.support:cardview-v7:${supportVersion}",
-
+            "support-annotations"         : "com.android.support:support-annotations:${supportVersion}",
             //java8-support
             "stream"                      : "com.annimon:stream:1.0.8",
 
