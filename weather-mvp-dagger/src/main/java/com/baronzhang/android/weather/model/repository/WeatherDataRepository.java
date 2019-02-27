@@ -41,21 +41,18 @@ public class WeatherDataRepository {
         //从服务端获取天气数据
         EnvironmentCloudWeatherService service = ApiClient.getService();
         Observable<Weather> observableForGetWeatherFromNetWork = Observable.combineLatest(
-                service.getWeatherLive(cityId),
-                service.getWeatherForecast(cityId),
-                service.getAirLive(cityId),
-                (weatherLive, forecast, airLive) -> new CloudWeatherAdapter(weatherLive, forecast, airLive).getWeather());
-        assert observableForGetWeatherFromNetWork != null;
-        observableForGetWeatherFromNetWork = observableForGetWeatherFromNetWork.doOnNext(weather -> Schedulers.io().createWorker().schedule(() -> {
-            try {
-                weatherDao.insertOrUpdateWeather(weather);
-            } catch (SQLException e) {
-                throw Exceptions.propagate(e);
-            }
-        }));
+                service.getWeatherLive(cityId), service.getWeatherForecast(cityId), service.getAirLive(cityId), (weatherLive, forecast, airLive)
+                        -> new CloudWeatherAdapter(weatherLive, forecast, airLive).getWeather())
+                .doOnNext(weather -> Schedulers.io().createWorker().schedule(() -> {
+                    try {
+                        weatherDao.insertOrUpdateWeather(weather);
+                    } catch (SQLException e) {
+                        throw Exceptions.propagate(e);
+                    }
+                }));
 
         return Observable.concat(observableForGetWeatherFromDB, observableForGetWeatherFromNetWork)
-                .filter(weather -> weather != null && !TextUtils.isEmpty(weather.getCityId()))
+                .filter(weather -> weather != null && !TextUtils.isEmpty(weather.getCityId()))//获取执行的条件
                 .distinct(weather -> weather.getWeatherLive().getTime())
                 .takeUntil(weather -> !refreshNow && System.currentTimeMillis() - weather.getWeatherLive().getTime() <= 15 * 60 * 1000);
     }

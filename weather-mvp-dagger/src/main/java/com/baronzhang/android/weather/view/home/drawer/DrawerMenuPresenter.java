@@ -88,6 +88,9 @@ public final class DrawerMenuPresenter implements DrawerContract.Presenter {
         PreferenceHelper.savePreference(WeatherSettings.SETTINGS_CURRENT_CITY_ID, cityId);
     }
 
+    /**
+     * 将城市从列表里面删除
+     */
     private String deleteCityFromDBAndReturnCurrentCityId(String cityId) {
         String currentCityId = PreferenceHelper.getSharedPreferences().getString(WeatherSettings.SETTINGS_CURRENT_CITY_ID.getId(), "");
         try {

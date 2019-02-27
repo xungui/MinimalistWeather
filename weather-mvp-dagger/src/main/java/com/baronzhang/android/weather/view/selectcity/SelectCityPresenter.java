@@ -38,6 +38,7 @@ public final class SelectCityPresenter implements SelectCityContract.Presenter {
 
     @Override
     public void loadCities() {
+        //数据库里面已经存储号所有要搜索的城市数据了，这些数据不是网络里面获取
         Subscription subscription = Observable.just(cityDao.queryCityList())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
