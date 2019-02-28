@@ -17,17 +17,10 @@ import javax.inject.Inject
 @ActivityScoped
 class HomePagePresenter @Inject
 internal constructor(private val context: Context) : HomePageContract.Presenter {
-
     private var weatherView: HomePageContract.View? = null
     private val subscriptions: CompositeSubscription = CompositeSubscription()
     @Inject
     lateinit var weatherRepository: WeatherDataRepository
-
-    init {
-//        DaggerPresenterComponent.builder()
-//                .applicationModule(ApplicationModule(context))
-//                .build().inject(this)
-    }
 
     override fun takeView(view: HomePageContract.View) {
         weatherView = view

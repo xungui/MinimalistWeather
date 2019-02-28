@@ -22,7 +22,7 @@ class SplashActivity : AppCompatActivity() {
         Observable.just<String>(initAppData())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { result -> gotoMainPage() }
+                .subscribe { gotoMainPage() }
     }
 
     private fun gotoMainPage() {

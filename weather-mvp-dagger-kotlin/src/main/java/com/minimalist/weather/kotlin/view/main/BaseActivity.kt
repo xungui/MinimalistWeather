@@ -31,8 +31,7 @@ open class BaseActivity : DaggerAppCompatActivity() {
     }
 
     companion object {
-
-        /*
+    /*
      * 解决Vector兼容性问题
      *
      * First up, this functionality was originally released in 23.2.0,

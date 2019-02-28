@@ -24,9 +24,9 @@ class LifeIndexAdapter(private val context: Context, private val indexList: List
 
     override fun onBindViewHolder(holder: LifeIndexAdapter.ViewHolder, position: Int) {
         val index = indexList!![position]
-        holder.indexIconImageView!!.setImageDrawable(getIndexDrawable(context, index.name!!))
-        holder.indexLevelTextView!!.text = index.index
-        holder.indexNameTextView!!.text = index.name
+        holder.indexIconImageView.setImageDrawable(getIndexDrawable(context, index.name!!))
+        holder.indexLevelTextView.text = index.index
+        holder.indexNameTextView.text = index.name
     }
 
     override fun getItemCount(): Int {

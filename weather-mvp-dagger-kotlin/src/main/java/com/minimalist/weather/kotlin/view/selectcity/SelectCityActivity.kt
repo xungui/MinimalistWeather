@@ -22,8 +22,6 @@ class SelectCityActivity : BaseActivity() {
     lateinit var toolbar: Toolbar
     @Inject
     lateinit var mSelectCityFragment: SelectCityFragment
-    @Inject
-    lateinit var selectCityPresenter: SelectCityPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

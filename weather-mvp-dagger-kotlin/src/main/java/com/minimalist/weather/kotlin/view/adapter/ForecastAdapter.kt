@@ -25,18 +25,18 @@ class ForecastAdapter(private val weatherForecasts: List<WeatherForecast>?) : Ba
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ForecastAdapter.ViewHolder, position: Int) {
         val weatherForecast = weatherForecasts!![position]
-        holder.weekTextView!!.text = weatherForecast.week
-        holder.dateTextView!!.text = weatherForecast.date
-        holder.weatherIconImageView!!.setImageResource(R.mipmap.ic_launcher)
-        holder.weatherTextView!!.text = if (TextUtils.isEmpty(weatherForecast.weather))
+        holder.weekTextView.text = weatherForecast.week
+        holder.dateTextView.text = weatherForecast.date
+        holder.weatherIconImageView.setImageResource(R.mipmap.ic_launcher)
+        holder.weatherTextView.text = if (TextUtils.isEmpty(weatherForecast.weather))
             if (weatherForecast.weatherDay == weatherForecast.weatherNight)
                 weatherForecast.weatherDay
             else
                 weatherForecast.weatherDay + "转" + weatherForecast.weatherNight
         else
             weatherForecast.weather
-        holder.tempMaxTextView!!.text = weatherForecast.tempMax.toString() + "°"
-        holder.tempMinTextView!!.text = weatherForecast.tempMin.toString() + "°"
+        holder.tempMaxTextView.text = weatherForecast.tempMax.toString() + "°"
+        holder.tempMinTextView.text = weatherForecast.tempMin.toString() + "°"
     }
 
     override fun getItemCount(): Int {
