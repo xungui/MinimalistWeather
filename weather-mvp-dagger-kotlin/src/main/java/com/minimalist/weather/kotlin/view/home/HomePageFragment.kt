@@ -18,6 +18,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.minimalist.weather.kotlin.R
+import com.minimalist.weather.kotlin.di.ActivityScoped
 import com.minimalist.weather.kotlin.model.WeatherDetail
 import com.minimalist.weather.kotlin.model.data.entity.weather.LifeIndex
 import com.minimalist.weather.kotlin.model.data.entity.weather.Weather
@@ -30,8 +31,10 @@ import com.minimalist.weather.kotlin.view.main.BaseFragment
 import com.minimalist.weather.kotlin.widget.IndicatorValueChangeListener
 import com.minimalist.weather.kotlin.widget.IndicatorView
 import java.util.*
+import javax.inject.Inject
 
-class HomePageFragment : BaseFragment(), HomePageContract.View {
+@ActivityScoped
+class HomePageFragment @Inject constructor() : BaseFragment(), HomePageContract.View {
     //AQI
     @BindView(R.id.tv_aqi)
     lateinit var aqiTextView: TextView
@@ -63,7 +66,8 @@ class HomePageFragment : BaseFragment(), HomePageContract.View {
     private var detailAdapter: DetailAdapter? = null
     private var forecastAdapter: ForecastAdapter? = null
     private var lifeIndexAdapter: LifeIndexAdapter? = null
-    private var presenter: HomePageContract.Presenter? = null
+    @Inject
+    lateinit var presenter: HomePageContract.Presenter
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -80,43 +84,43 @@ class HomePageFragment : BaseFragment(), HomePageContract.View {
         unbinder = ButterKnife.bind(this, rootView)
 
         //天气详情
-        detailRecyclerView!!.isNestedScrollingEnabled = false
-        detailRecyclerView!!.layoutManager = GridLayoutManager(activity, 3)
+        detailRecyclerView.isNestedScrollingEnabled = false
+        detailRecyclerView.layoutManager = GridLayoutManager(activity, 3)
         weatherDetails = ArrayList()
         detailAdapter = DetailAdapter(weatherDetails)
         detailAdapter!!.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id -> }
-        forecastRecyclerView!!.itemAnimator = DefaultItemAnimator()
-        detailRecyclerView!!.adapter = detailAdapter
+        forecastRecyclerView.itemAnimator = DefaultItemAnimator()
+        detailRecyclerView.adapter = detailAdapter
 
         //天气预报
-        forecastRecyclerView!!.isNestedScrollingEnabled = false
-        forecastRecyclerView!!.layoutManager = LinearLayoutManager(activity)
+        forecastRecyclerView.isNestedScrollingEnabled = false
+        forecastRecyclerView.layoutManager = LinearLayoutManager(activity)
         weatherForecasts = ArrayList()
         forecastAdapter = ForecastAdapter(weatherForecasts)
         forecastAdapter!!.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id -> }
-        forecastRecyclerView!!.itemAnimator = DefaultItemAnimator()
-        forecastRecyclerView!!.adapter = forecastAdapter
+        forecastRecyclerView.itemAnimator = DefaultItemAnimator()
+        forecastRecyclerView.adapter = forecastAdapter
 
         //生活指数
-        lifeIndexRecyclerView!!.isNestedScrollingEnabled = false
-        lifeIndexRecyclerView!!.layoutManager = GridLayoutManager(activity, 4)
+        lifeIndexRecyclerView.isNestedScrollingEnabled = false
+        lifeIndexRecyclerView.layoutManager = GridLayoutManager(activity, 4)
         lifeIndices = ArrayList()
         lifeIndexAdapter = LifeIndexAdapter(activity!!.applicationContext, lifeIndices)
         lifeIndexAdapter!!.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
             Toast.makeText(this@HomePageFragment.context, lifeIndices!![position].details, Toast.LENGTH_LONG).show()
         }
-        lifeIndexRecyclerView!!.itemAnimator = DefaultItemAnimator()
-        lifeIndexRecyclerView!!.adapter = lifeIndexAdapter
-        aqiIndicatorView!!.setIndicatorValueChangeListener(object : IndicatorValueChangeListener {
+        lifeIndexRecyclerView.itemAnimator = DefaultItemAnimator()
+        lifeIndexRecyclerView.adapter = lifeIndexAdapter
+        aqiIndicatorView.setIndicatorValueChangeListener(object : IndicatorValueChangeListener {
             override fun onChange(currentIndicatorValue: Int, stateDescription: String, indicatorTextColor: Int) {
-                aqiTextView!!.text = currentIndicatorValue.toString()
+                aqiTextView.text = currentIndicatorValue.toString()
                 if (TextUtils.isEmpty(weather!!.airQualityLive!!.quality)) {
-                    qualityTextView!!.text = stateDescription
+                    qualityTextView.text = stateDescription
                 } else {
-                    qualityTextView!!.text = weather!!.airQualityLive!!.quality
+                    qualityTextView.text = weather!!.airQualityLive!!.quality
                 }
-                aqiTextView!!.setTextColor(indicatorTextColor)
-                qualityTextView!!.setTextColor(indicatorTextColor)
+                aqiTextView.setTextColor(indicatorTextColor)
+                qualityTextView.setTextColor(indicatorTextColor)
             }
         })
         return rootView
@@ -124,8 +128,8 @@ class HomePageFragment : BaseFragment(), HomePageContract.View {
 
     override fun onResume() {
         super.onResume()
-        assert(presenter != null)
-        presenter!!.subscribe()
+        presenter.subscribe()
+        presenter.takeView(this)
     }
 
     @SuppressLint("SetTextI18n")
@@ -135,10 +139,10 @@ class HomePageFragment : BaseFragment(), HomePageContract.View {
         onFragmentInteractionListener!!.updatePageTitle(weather)
 
         val airQualityLive = weather.airQualityLive
-        aqiIndicatorView!!.setIndicatorValue(airQualityLive!!.aqi)
-        adviceTextView!!.text = airQualityLive.advice
+        aqiIndicatorView.setIndicatorValue(airQualityLive!!.aqi)
+        adviceTextView.text = airQualityLive.advice
         val rank = airQualityLive.cityRank
-        cityRankTextView!!.text = if (TextUtils.isEmpty(rank)) "首要污染物: " + airQualityLive.primary!! else rank
+        cityRankTextView.text = if (TextUtils.isEmpty(rank)) "首要污染物: " + airQualityLive.primary!! else rank
 
         weatherDetails!!.clear()
         weatherDetails!!.addAll(createDetails(weather))
@@ -168,13 +172,10 @@ class HomePageFragment : BaseFragment(), HomePageContract.View {
         return details
     }
 
-    override fun setPresenter(presenter: HomePageContract.Presenter) {
-        this.presenter = presenter
-    }
-
     override fun onPause() {
         super.onPause()
-        presenter!!.unSubscribe()
+        presenter.unSubscribe()
+        presenter.dropView()
     }
 
     override fun onDestroyView() {
@@ -193,11 +194,4 @@ class HomePageFragment : BaseFragment(), HomePageContract.View {
         fun addOrUpdateCityListInDrawerMenu(weather: Weather)
     }
 
-    companion object {
-
-        fun newInstance(): HomePageFragment {
-
-            return HomePageFragment()
-        }
-    }
 }

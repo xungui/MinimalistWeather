@@ -3,18 +3,18 @@ package com.minimalist.weather.kotlin.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import com.minimalist.weather.kotlin.model.data.source.local.CityDatabase
 import com.minimalist.weather.kotlin.model.preference.PreferenceHelper
 import com.minimalist.weather.kotlin.model.preference.WeatherSettings
 import com.minimalist.weather.kotlin.utils.system.StatusBarHelper
 import com.minimalist.weather.kotlin.view.home.MainActivity
-import com.minimalist.weather.kotlin.view.main.BaseActivity
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import java.io.InvalidClassException
 
-class SplashActivity : BaseActivity() {
+class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

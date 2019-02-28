@@ -1,24 +1,13 @@
 package com.minimalist.weather.kotlin.di
 
-
+import android.app.Application
 import android.content.Context
-import com.minimalist.weather.kotlin.main.WeatherApplication
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
-import javax.inject.Singleton
 
 @Module
-class ApplicationModule(private val context: Context) {
+abstract class ApplicationModule {
 
-    @Provides
-    @Singleton
-    internal fun provideApplication(): WeatherApplication {
-        return context.applicationContext as WeatherApplication
-    }
-
-    @Provides
-    @Singleton
-    internal fun provideContext(): Context {
-        return context
-    }
+    @Binds
+    internal abstract fun bindContext(application: Application): Context
 }

@@ -1,17 +1,20 @@
 package com.minimalist.weather.kotlin.view.selectcity
 
 import com.minimalist.weather.kotlin.di.ActivityScoped
+import com.minimalist.weather.kotlin.di.FragmentScoped
 import com.minimalist.weather.kotlin.view.contract.SelectCityContract
-
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
+import dagger.android.ContributesAndroidInjector
 
 @Module
-class SelectCityModule(private val view: SelectCityContract.View) {
+abstract class SelectCityModule {
 
-    @Provides
+    @FragmentScoped
+    @ContributesAndroidInjector
+    internal abstract fun selectCityPresenter(): SelectCityFragment
+
     @ActivityScoped
-    internal fun provideSelectCityContractView(): SelectCityContract.View {
-        return view
-    }
+    @Binds
+    abstract fun selectCityPresenter(presenter: SelectCityPresenter): SelectCityContract.Presenter
 }

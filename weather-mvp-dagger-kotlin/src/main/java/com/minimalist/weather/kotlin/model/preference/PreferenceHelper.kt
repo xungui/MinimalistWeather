@@ -1,21 +1,17 @@
 package com.minimalist.weather.kotlin.model.preference
 
+
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
-
-
-import com.minimalist.weather.kotlin.main.WeatherApplication
-
+import com.minimalist.weather.kotlin.main.WeatherApp
 import java.io.InvalidClassException
-import java.util.ArrayList
-import java.util.Collections
-import java.util.HashMap
+import java.util.*
 
 class PreferenceHelper private constructor() {
     companion object {
         private val TAG = "Preferences"
-        private val SETTINGS_FILENAME = WeatherApplication::class.java.getPackage()!!.name
+        private val SETTINGS_FILENAME = WeatherApp::class.java.getPackage()!!.name
         private val CONFIGURATION_LISTENERS = Collections.synchronizedList(ArrayList<ConfigurationListener>())
 
         fun loadDefaults() {
@@ -42,7 +38,7 @@ class PreferenceHelper private constructor() {
         }
 
         val sharedPreferences: SharedPreferences
-            get() = WeatherApplication.instance!!.getSharedPreferences(
+            get() = WeatherApp.instance.getSharedPreferences(
                     SETTINGS_FILENAME, Context.MODE_PRIVATE)
 
         @Throws(InvalidClassException::class)

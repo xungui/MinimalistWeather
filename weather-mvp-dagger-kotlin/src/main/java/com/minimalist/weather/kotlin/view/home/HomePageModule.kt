@@ -2,22 +2,25 @@ package com.minimalist.weather.kotlin.view.home
 
 
 import com.minimalist.weather.kotlin.di.ActivityScoped
+import com.minimalist.weather.kotlin.di.FragmentScoped
 import com.minimalist.weather.kotlin.view.contract.HomePageContract
-
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
+import dagger.android.ContributesAndroidInjector
 
 /**
  * This is a Dagger module. We use this to pass in the View dependency to the
  * [HomePagePresenter]
  */
 @Module
-class HomePageModule(private val view: HomePageContract.View) {
+abstract class HomePageModule {
 
-    @Provides
+    @FragmentScoped
+    @ContributesAndroidInjector
+    abstract fun homePageFragment(): HomePageFragment
+
     @ActivityScoped
-    internal fun provideHomePageContractView(): HomePageContract.View {
-        return view
-    }
+    @Binds
+    abstract fun homePagePresenter(presenter: HomePagePresenter): HomePageContract.Presenter
 
 }

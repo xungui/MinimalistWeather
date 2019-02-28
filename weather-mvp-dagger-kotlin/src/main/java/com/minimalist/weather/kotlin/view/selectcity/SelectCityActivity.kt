@@ -11,7 +11,6 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.jakewharton.rxbinding.support.v7.widget.RxSearchView
 import com.minimalist.weather.kotlin.R
-import com.minimalist.weather.kotlin.main.WeatherApplication
 import com.minimalist.weather.kotlin.utils.ActivityUtils
 import com.minimalist.weather.kotlin.view.main.BaseActivity
 import rx.android.schedulers.AndroidSchedulers
@@ -21,6 +20,7 @@ import javax.inject.Inject
 class SelectCityActivity : BaseActivity() {
     @BindView(R.id.toolbar)
     lateinit var toolbar: Toolbar
+    @Inject
     lateinit var mSelectCityFragment: SelectCityFragment
     @Inject
     lateinit var selectCityPresenter: SelectCityPresenter
@@ -37,14 +37,9 @@ class SelectCityActivity : BaseActivity() {
         }
         var selectCityFragment = supportFragmentManager.findFragmentById(R.id.fragment_container) as? SelectCityFragment
         if (selectCityFragment == null) {
-            selectCityFragment = SelectCityFragment.newInstance()
+            selectCityFragment = mSelectCityFragment
             ActivityUtils.addFragmentToActivity(supportFragmentManager, selectCityFragment, R.id.fragment_container)
         }
-        this.mSelectCityFragment = selectCityFragment
-        DaggerSelectCityComponent.builder()
-                .applicationComponent(WeatherApplication.instance.applicationComponent)
-                .selectCityModule(SelectCityModule(mSelectCityFragment))
-                .build().inject(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -61,7 +56,7 @@ class SelectCityActivity : BaseActivity() {
                     .throttleLast(100, TimeUnit.MILLISECONDS)
                     .debounce(100, TimeUnit.MILLISECONDS)
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe { searchText -> mSelectCityFragment?.cityListAdapter?.filter?.filter(searchText) }
+                    .subscribe { searchText -> mSelectCityFragment.cityListAdapter.filter.filter(searchText) }
             return true
         }
         return super.onOptionsItemSelected(item)

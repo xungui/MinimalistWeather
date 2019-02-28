@@ -14,6 +14,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.minimalist.weather.kotlin.R
+import com.minimalist.weather.kotlin.di.ActivityScoped
 import com.minimalist.weather.kotlin.model.data.entity.city.City
 import com.minimalist.weather.kotlin.model.preference.PreferenceHelper
 import com.minimalist.weather.kotlin.model.preference.WeatherSettings
@@ -23,14 +24,17 @@ import com.minimalist.weather.kotlin.view.main.BaseFragment
 import com.minimalist.weather.kotlin.widget.DividerItemDecoration
 import java.io.InvalidClassException
 import java.util.*
+import javax.inject.Inject
 
-class SelectCityFragment : BaseFragment(), SelectCityContract.View {
+@ActivityScoped
+class SelectCityFragment @Inject constructor() : BaseFragment(), SelectCityContract.View {
     lateinit var cities: MutableList<City>
     lateinit var cityListAdapter: CityListAdapter
     @BindView(R.id.rv_city_list)
     lateinit var recyclerView: RecyclerView
     private var unbinder: Unbinder? = null
-    private var presenter: SelectCityContract.Presenter? = null
+    @Inject
+    lateinit var presenter: SelectCityContract.Presenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_select_city, container, false)
@@ -54,31 +58,28 @@ class SelectCityFragment : BaseFragment(), SelectCityContract.View {
             }
         }
         recyclerView.adapter = cityListAdapter
-        presenter?.subscribe()
+        presenter.subscribe()
         return rootView
     }
 
+    override fun onResume() {
+        super.onResume()
+        presenter.takeView(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        presenter.dropView()
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
         unbinder?.unbind()
-        presenter?.unSubscribe()
+        presenter.unSubscribe()
     }
-
 
     override fun displayCities(cities: List<City>) {
         this.cities.addAll(cities)
         cityListAdapter.notifyDataSetChanged()
-    }
-
-    override fun setPresenter(presenter: SelectCityContract.Presenter) {
-        this.presenter = presenter
-    }
-
-    companion object {
-
-        fun newInstance(): SelectCityFragment {
-            return SelectCityFragment()
-        }
     }
 }

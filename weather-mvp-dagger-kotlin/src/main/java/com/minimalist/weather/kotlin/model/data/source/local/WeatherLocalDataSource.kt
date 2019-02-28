@@ -1,18 +1,19 @@
 package com.minimalist.weather.kotlin.model.data.source.local
 
-import android.support.annotation.VisibleForTesting
 import com.minimalist.weather.kotlin.model.data.entity.weather.Weather
 import com.minimalist.weather.kotlin.model.data.source.WeatherDataSource
 import com.minimalist.weather.kotlin.utils.AppExecutors
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * 直接操作数据库获取数据
  *
  * 在数据没有Dirty时，先访问内存有没有数据，再访问数据库有没有数据，之后再去网络获取数据
  */
-class WeatherLocalDataSource private constructor(
-        private val appExecutors: AppExecutors,
-        private val weatherDao: WeatherDao) : WeatherDataSource {
+@Singleton
+class WeatherLocalDataSource @Inject constructor(
+        private val appExecutors: AppExecutors, private val weatherDao: WeatherDao) : WeatherDataSource {
 
     override fun refreshWeathers() {
         //do nothing
@@ -97,25 +98,6 @@ class WeatherLocalDataSource private constructor(
                     weatherDao.updateWeatherForecast(weatherForecast)
                 }
             }
-        }
-    }
-
-    companion object {
-        private var INSTANCE: WeatherLocalDataSource? = null
-
-        @JvmStatic
-        fun getInstance(appExecutors: AppExecutors, weatherDao: WeatherDao): WeatherLocalDataSource {
-            if (INSTANCE == null) {
-                synchronized(WeatherLocalDataSource::javaClass) {
-                    INSTANCE = WeatherLocalDataSource(appExecutors, weatherDao)
-                }
-            }
-            return INSTANCE!!
-        }
-
-        @VisibleForTesting
-        fun clearInstance() {
-            INSTANCE = null
         }
     }
 }

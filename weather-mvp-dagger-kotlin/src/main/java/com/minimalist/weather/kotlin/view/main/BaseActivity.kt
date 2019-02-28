@@ -1,12 +1,12 @@
 package com.minimalist.weather.kotlin.view.main
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.app.AppCompatDelegate
 import android.view.Menu
 import android.view.MenuItem
+import dagger.android.support.DaggerAppCompatActivity
 
-open class BaseActivity : AppCompatActivity() {
+open class BaseActivity : DaggerAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

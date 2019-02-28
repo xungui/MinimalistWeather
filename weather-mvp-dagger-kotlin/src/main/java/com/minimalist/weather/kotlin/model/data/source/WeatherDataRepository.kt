@@ -4,6 +4,8 @@ import com.minimalist.weather.kotlin.model.data.Local
 import com.minimalist.weather.kotlin.model.data.Remote
 import com.minimalist.weather.kotlin.model.data.entity.weather.Weather
 import java.util.*
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  *
@@ -11,8 +13,8 @@ import java.util.*
  *
  * 如果数据已经dirty，访问网络更新数据
  */
-class WeatherDataRepository(@Local val weatherLocalDataSource: WeatherDataSource,
-                            @Remote val weatherRemoteDataSource: WeatherDataSource) : WeatherDataSource {
+@Singleton
+class WeatherDataRepository : WeatherDataSource {
     /**
      * This variable has public visibility so it can be accessed from tests.
      */
@@ -24,6 +26,15 @@ class WeatherDataRepository(@Local val weatherLocalDataSource: WeatherDataSource
      */
     private var cacheIsDirty = false
 
+    private val weatherLocalDataSource: WeatherDataSource
+    private val weatherRemoteDataSource: WeatherDataSource
+
+    @Inject
+    constructor(@Local weatherLocalDataSource: WeatherDataSource,
+                @Remote weatherRemoteDataSource: WeatherDataSource) {
+        this.weatherLocalDataSource = weatherLocalDataSource
+        this.weatherRemoteDataSource = weatherRemoteDataSource
+    }
 
     override fun queryAllSaveCity(callback: WeatherDataSource.LoadWeathersCallback) {
         weatherLocalDataSource.queryAllSaveCity(callback)
@@ -81,21 +92,5 @@ class WeatherDataRepository(@Local val weatherLocalDataSource: WeatherDataSource
                 callback.onDataNotAvailable()
             }
         })
-    }
-
-    companion object {
-        private var INSTANCE: WeatherDataRepository? = null
-        private val lock = Any()
-
-        @JvmStatic
-        fun getInstance(weatherLocalDataSource: WeatherDataSource,
-                        weatherRemoteDataSource: WeatherDataSource): WeatherDataRepository {
-            synchronized(lock) {
-                if (INSTANCE == null) {
-                    INSTANCE = WeatherDataRepository(weatherLocalDataSource, weatherRemoteDataSource)
-                }
-                return INSTANCE!!
-            }
-        }
     }
 }

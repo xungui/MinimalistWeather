@@ -1,15 +1,16 @@
 package com.minimalist.weather.kotlin.model.data.source.remote
 
-import android.support.annotation.VisibleForTesting
 import com.minimalist.weather.kotlin.model.data.entity.CloudWeatherAdapter
 import com.minimalist.weather.kotlin.model.data.entity.weather.Weather
 import com.minimalist.weather.kotlin.model.data.source.WeatherDataSource
-import com.minimalist.weather.kotlin.model.data.source.local.WeatherDao
 import com.minimalist.weather.kotlin.model.http.ApiClient
 import com.minimalist.weather.kotlin.utils.AppExecutors
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class WeatherRemoteDataSource(val appExecutors: AppExecutors,
-                              val weatherDao: WeatherDao) : WeatherDataSource {
+@Singleton
+class WeatherRemoteDataSource @Inject constructor(private val appExecutors: AppExecutors)
+    : WeatherDataSource {
 
     override fun refreshWeathers() {
         //do nothing
@@ -30,7 +31,7 @@ class WeatherRemoteDataSource(val appExecutors: AppExecutors,
                 val weather = CloudWeatherAdapter(weatherLive, weatherForecast, airLive).getWeather()
                 appExecutors.mainThread.execute { callback.onWeatherLoaded(weather) }
             } catch (e: Exception) {
-                appExecutors.mainThread.execute { callback.onDataNotAvailable()}
+                appExecutors.mainThread.execute { callback.onDataNotAvailable() }
             }
         }
     }
@@ -45,24 +46,5 @@ class WeatherRemoteDataSource(val appExecutors: AppExecutors,
 
     override fun updateWeather(weather: Weather) {
         //do nothing
-    }
-
-    companion object {
-        private var INSTANCE: WeatherRemoteDataSource? = null
-
-        @JvmStatic
-        fun getInstance(appExecutors: AppExecutors, weatherDao: WeatherDao): WeatherRemoteDataSource {
-            if (INSTANCE == null) {
-                synchronized(WeatherRemoteDataSource::javaClass) {
-                    INSTANCE = WeatherRemoteDataSource(appExecutors, weatherDao)
-                }
-            }
-            return INSTANCE!!
-        }
-
-        @VisibleForTesting
-        fun clearInstance() {
-            INSTANCE = null
-        }
     }
 }

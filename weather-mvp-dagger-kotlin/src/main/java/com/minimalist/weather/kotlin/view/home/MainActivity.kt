@@ -17,7 +17,6 @@ import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.minimalist.weather.kotlin.R
-import com.minimalist.weather.kotlin.main.WeatherApplication
 import com.minimalist.weather.kotlin.model.data.entity.weather.Weather
 import com.minimalist.weather.kotlin.utils.ActivityUtils
 import com.minimalist.weather.kotlin.utils.DateConvertUtils
@@ -45,11 +44,14 @@ class MainActivity : BaseActivity(), HomePageFragment.OnFragmentInteractionListe
     lateinit var weatherNameTextView: TextView
     @BindView(R.id.publish_time_text_view)
     lateinit var realTimeTextView: TextView
+    private var currentCityId: String? = null
 
     @Inject
     lateinit var homePagePresenter: HomePagePresenter
-    private lateinit var drawerMenuPresenter: DrawerMenuPresenter
-    private var currentCityId: String? = null
+    @Inject
+    lateinit var homePageFragmentProvider: dagger.Lazy<HomePageFragment>
+    @Inject
+    lateinit var drawerMenuPresenter: DrawerMenuPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,20 +80,15 @@ class MainActivity : BaseActivity(), HomePageFragment.OnFragmentInteractionListe
 
         var homePageFragment: HomePageFragment? = supportFragmentManager.findFragmentById(R.id.fragment_container) as? HomePageFragment
         if (homePageFragment == null) {
-            homePageFragment = HomePageFragment.newInstance()
+            homePageFragment = homePageFragmentProvider.get()
             ActivityUtils.addFragmentToActivity(supportFragmentManager, homePageFragment, R.id.fragment_container)
         }
-        DaggerHomePageComponent.builder()
-                .applicationComponent(WeatherApplication.instance!!.applicationComponent)
-                .homePageModule(HomePageModule(homePageFragment))
-                .build().inject(this)
 
         var drawerMenuFragment: DrawerMenuFragment? = supportFragmentManager.findFragmentById(R.id.fragment_container_drawer_menu) as? DrawerMenuFragment
         if (drawerMenuFragment == null) {
             drawerMenuFragment = DrawerMenuFragment.newInstance(1)
             ActivityUtils.addFragmentToActivity(supportFragmentManager, drawerMenuFragment, R.id.fragment_container_drawer_menu)
         }
-        drawerMenuPresenter = DrawerMenuPresenter(this, drawerMenuFragment)
     }
 
     override fun onBackPressed() {
@@ -110,14 +107,12 @@ class MainActivity : BaseActivity(), HomePageFragment.OnFragmentInteractionListe
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
-        if (id == R.id.action_settings) {
-            return true
-        } else if (id == R.id.action_about) {
-            return true
-        } else if (id == R.id.action_feedback) {
-            return true
+        return when (id) {
+            R.id.action_settings -> true
+            R.id.action_about -> true
+            R.id.action_feedback -> true
+            else -> super.onOptionsItemSelected(item)
         }
-        return super.onOptionsItemSelected(item)
     }
 
     override fun updatePageTitle(weather: Weather) {
