@@ -1,13 +1,11 @@
 package com.minimalist.weather.kotlin.widget
 
 import android.content.Context
-import android.content.res.TypedArray
 import android.graphics.Canvas
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.View
 
 /**
  * @author baronzhang (baron[dot]zhanglei[at]gmail[dot]com)
@@ -32,15 +30,12 @@ class DividerItemDecoration(context: Context, orientation: Int) : RecyclerView.I
     }
 
     override fun onDraw(c: Canvas?, parent: RecyclerView?) {
-
         if (mOrientation == VERTICAL_LIST) {
             drawVertical(c, parent)
         } else {
             drawHorizontal(c, parent)
         }
-
     }
-
 
     fun drawVertical(c: Canvas?, parent: RecyclerView?) {
         val left = parent!!.paddingLeft
@@ -85,7 +80,7 @@ class DividerItemDecoration(context: Context, orientation: Int) : RecyclerView.I
 
     companion object {
         private val ATTRS = intArrayOf(android.R.attr.listDivider)
-        val HORIZONTAL_LIST = LinearLayoutManager.HORIZONTAL
-        val VERTICAL_LIST = LinearLayoutManager.VERTICAL
+        const val HORIZONTAL_LIST = LinearLayoutManager.HORIZONTAL
+        const val VERTICAL_LIST = LinearLayoutManager.VERTICAL
     }
 }

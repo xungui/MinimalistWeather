@@ -1,12 +1,12 @@
 package com.baronzhang.android.weather.di;
 
-import com.baronzhang.android.weather.view.home.drawer.DrawerMenuPresenter;
-import com.baronzhang.android.weather.view.selectcity.SelectCityPresenter;
+import com.baronzhang.android.weather.feature.home.drawer.DrawerMenuPresenter;
+import com.baronzhang.android.weather.feature.selectcity.SelectCityPresenter;
 
 import javax.inject.Singleton;
 
 import dagger.Component;
-import com.baronzhang.android.weather.view.home.HomePagePresenter;
+import com.baronzhang.android.weather.feature.home.HomePagePresenter;
 
 /**
  * @author 张磊 (baron[dot]zhanglei[at]gmail[dot]com)

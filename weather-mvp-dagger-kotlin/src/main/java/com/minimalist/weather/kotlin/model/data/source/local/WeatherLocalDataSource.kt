@@ -15,10 +15,6 @@ import javax.inject.Singleton
 class WeatherLocalDataSource @Inject constructor(
         private val appExecutors: AppExecutors, private val weatherDao: WeatherDao) : WeatherDataSource {
 
-    override fun refreshWeathers() {
-        //do nothing
-    }
-
     override fun queryAllSaveCity(callback: WeatherDataSource.LoadWeathersCallback) {
         appExecutors.diskIO.execute {
             val weathers = weatherDao.queryAllSaveCity()
@@ -36,7 +32,7 @@ class WeatherLocalDataSource @Inject constructor(
         }
     }
 
-    override fun getWeather(cityId: String, callback: WeatherDataSource.LoadWeatherCallback) {
+    override fun getWeather(cityId: String, forceRefresh: Boolean, callback: WeatherDataSource.LoadWeatherCallback) {
         appExecutors.diskIO.execute {
             val weather = weatherDao.queryWeather(cityId)
             appExecutors.mainThread.execute {

@@ -12,15 +12,11 @@ import javax.inject.Singleton
 class WeatherRemoteDataSource @Inject constructor(private val appExecutors: AppExecutors)
     : WeatherDataSource {
 
-    override fun refreshWeathers() {
-        //do nothing
-    }
-
     override fun queryAllSaveCity(callback: WeatherDataSource.LoadWeathersCallback) {
         //do nothing
     }
 
-    override fun getWeather(cityId: String, callback: WeatherDataSource.LoadWeatherCallback) {
+    override fun getWeather(cityId: String, forceRefresh: Boolean, callback: WeatherDataSource.LoadWeatherCallback) {
         appExecutors.networkIO.execute {
             val service = ApiClient.service
             try {

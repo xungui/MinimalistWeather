@@ -4,25 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/side_nav_bar"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     tools:ignore="RtlHardcoded">
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="@string/author_mail" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_above="@id/textView"
+        android:layout_alignParentBottom="true"
         android:contentDescription="@string/content_description_default"
         android:src="@mipmap/ic_launcher" />
 
@@ -41,9 +34,9 @@
         android:id="@+id/add_city_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="16dp"
         android:text="添加城市" />
 
 </RelativeLayout>

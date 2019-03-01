@@ -5,10 +5,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 object DateConvertUtils {
-
-    val DATA_FORMAT_PATTEN_YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss"
-    val DATA_FORMAT_PATTEN_YYYY_MM_DD_HH_MM = "yyyy-MM-dd HH:mm"
-    val DATA_FORMAT_PATTEN_YYYY_MM_DD = "yyyy-MM-dd"
+    const val DATA_FORMAT_PATTEN_YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss"
+    const val DATA_FORMAT_PATTEN_YYYY_MM_DD_HH_MM = "yyyy-MM-dd HH:mm"
+    const val DATA_FORMAT_PATTEN_YYYY_MM_DD = "yyyy-MM-dd"
 
     /**
      * 将时间转换为时间戳

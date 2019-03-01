@@ -1,10 +1,10 @@
 package com.minimalist.weather.kotlin.di;
 
-import com.minimalist.weather.kotlin.view.home.HomePageModule;
-import com.minimalist.weather.kotlin.view.home.MainActivity;
-import com.minimalist.weather.kotlin.view.home.drawer.DrawerMenuModule;
-import com.minimalist.weather.kotlin.view.selectcity.SelectCityActivity;
-import com.minimalist.weather.kotlin.view.selectcity.SelectCityModule;
+import com.minimalist.weather.kotlin.feature.home.HomePageModule;
+import com.minimalist.weather.kotlin.feature.home.MainActivity;
+import com.minimalist.weather.kotlin.feature.home.drawer.DrawerMenuModule;
+import com.minimalist.weather.kotlin.feature.selectcity.SelectCityActivity;
+import com.minimalist.weather.kotlin.feature.selectcity.SelectCityModule;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;

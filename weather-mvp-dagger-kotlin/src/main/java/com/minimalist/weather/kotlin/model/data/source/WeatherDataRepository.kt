@@ -20,12 +20,6 @@ class WeatherDataRepository : WeatherDataSource {
      */
     var cachedWeathers: LinkedHashMap<String, Weather> = LinkedHashMap()
 
-    /**
-     * Marks the cache as invalid, to force an update the next time data is requested. This variable
-     * has package local visibility so it can be accessed from tests.
-     */
-    private var cacheIsDirty = false
-
     private val weatherLocalDataSource: WeatherDataSource
     private val weatherRemoteDataSource: WeatherDataSource
 
@@ -40,15 +34,14 @@ class WeatherDataRepository : WeatherDataSource {
         weatherLocalDataSource.queryAllSaveCity(callback)
     }
 
-    override fun getWeather(cityId: String, callback: WeatherDataSource.LoadWeatherCallback) {
+    override fun getWeather(cityId: String,forceRefresh: Boolean, callback: WeatherDataSource.LoadWeatherCallback) {
         val weatherInCache = getWeatherWithId(cityId)
         //同一个小时内不会发布新的天气信息
-        if (weatherInCache != null && isInFifteenMinute(weatherInCache)) {
+        if (weatherInCache != null && isInFifteenMinute(weatherInCache) && !forceRefresh) {
             callback.onWeatherLoaded(weatherInCache)
         }
-        if (weatherInCache == null || cacheIsDirty) {
+        if (weatherInCache == null || forceRefresh) {
             getTasksFromRemoteDataSource(cityId, callback)
-            return
         }
     }
 
@@ -62,10 +55,6 @@ class WeatherDataRepository : WeatherDataSource {
 
     override fun updateWeather(weather: Weather) {
         weatherLocalDataSource.updateWeather(weather)
-    }
-
-    override fun refreshWeathers() {
-        cacheIsDirty = true
     }
 
     /**
@@ -82,7 +71,7 @@ class WeatherDataRepository : WeatherDataSource {
     private fun getWeatherWithId(id: String) = cachedWeathers[id]
 
     private fun getTasksFromRemoteDataSource(cityId: String, callback: WeatherDataSource.LoadWeatherCallback) {
-        weatherRemoteDataSource.getWeather(cityId, object : WeatherDataSource.LoadWeatherCallback {
+        weatherRemoteDataSource.getWeather(cityId, true, object : WeatherDataSource.LoadWeatherCallback {
             override fun onWeatherLoaded(weather: Weather) {
                 insertWeather(weather)
                 callback.onWeatherLoaded(weather)

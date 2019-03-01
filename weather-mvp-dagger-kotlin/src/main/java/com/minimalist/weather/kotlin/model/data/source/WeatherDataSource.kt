@@ -26,7 +26,7 @@ interface WeatherDataSource {
     /**
      * 查询制定城市天气信息
      */
-    fun getWeather(cityId: String, callback: LoadWeatherCallback)
+    fun getWeather(cityId: String, forceRefresh: Boolean, callback: LoadWeatherCallback)
 
     /**
      * 根据City ID删除天气信息
@@ -42,11 +42,4 @@ interface WeatherDataSource {
      * 更新天气信息
      */
     fun updateWeather(weather: Weather)
-
-    /**
-     * 刷新天气信息
-     */
-    fun refreshWeathers()
-
-
 }

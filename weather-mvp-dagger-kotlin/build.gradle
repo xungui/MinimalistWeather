@@ -20,16 +20,16 @@ android {
     buildTypes {
         debug {
             buildConfigField("boolean", "LOG_DEBUG", "true")
-            buildConfigField 'com.minimalist.weather.kotlin.utils.stetho.StethoHelper', 'STETHO',
-                    'new com.minimalist.weather.kotlin.utils.stetho.DebugStethoHelper()'
+            buildConfigField 'com.minimalist.weather.kotlin.main.stetho.StethoHelper', 'STETHO',
+                    'new com.minimalist.weather.kotlin.main.stetho.DebugStethoHelper()'
         }
 
         release {
             buildConfigField("boolean", "LOG_DEBUG", "false")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField 'com.minimalist.weather.kotlin.utils.stetho.StethoHelper', 'STETHO',
-                    'new com.minimalist.weather.kotlin.utils.stetho.ReleaseStethoHelper()'
+            buildConfigField 'com.minimalist.weather.kotlin.main.stetho.StethoHelper', 'STETHO',
+                    'new com.minimalist.weather.kotlin.main.stetho.ReleaseStethoHelper()'
         }
     }
 

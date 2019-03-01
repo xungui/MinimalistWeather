@@ -2,24 +2,17 @@ package com.minimalist.weather.kotlin.widget
 
 
 import android.content.Context
-import android.content.res.TypedArray
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.PorterDuff
+import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.support.graphics.drawable.VectorDrawableCompat
 import android.support.v4.graphics.drawable.DrawableCompat
 import android.util.AttributeSet
-import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
-
 import com.minimalist.weather.kotlin.R
 
 
@@ -28,7 +21,7 @@ import com.minimalist.weather.kotlin.R
  * 16/12/11
  */
 class IndicatorView(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
-    private var paint: Paint? = null
+    private lateinit var paint: Paint
     private var markerId: Int = 0
     private var marker: Bitmap? = null
     private var indicatorValue = 0// 默认AQI值
@@ -76,9 +69,9 @@ class IndicatorView(context: Context, attrs: AttributeSet) : LinearLayout(contex
     private fun initPaint() {
         this.paint = Paint()
         // 设置是否使用抗锯齿功能，会消耗较大资源，绘制图形速度会变慢。
-        this.paint!!.isAntiAlias = true
+        this.paint.isAntiAlias = true
         // 设定是否使用图像抖动处理，会使绘制出来的图片颜色更加平滑和饱满，图像更加清晰
-        this.paint!!.isDither = true
+        this.paint.isDither = true
     }
 
     /**
@@ -89,7 +82,7 @@ class IndicatorView(context: Context, attrs: AttributeSet) : LinearLayout(contex
         this.textSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, textSize.toFloat(), dm).toInt()
         this.intervalValue = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, intervalValue.toFloat(), dm).toInt()
 
-        val typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.IndicatorView)
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.IndicatorView)
         this.markerId = typedArray.getResourceId(R.styleable.IndicatorView_marker, R.drawable.ic_vector_indicator_down)
         this.marker = drawableToBitmap(createVectorDrawable(markerId, R.color.indicator_color_1))
         this.indicatorValue = typedArray.getInt(R.styleable.IndicatorView_indicatorValue, indicatorValue)
@@ -185,22 +178,15 @@ class IndicatorView(context: Context, attrs: AttributeSet) : LinearLayout(contex
      * 用于绘制指示器图标
      */
     private fun drawMarkView(canvas: Canvas) {
-
         val width = this.indicatorViewWidth - this.paddingLeft - this.paddingRight - intervalValue * 5
-
         var left = this.paddingLeft
-        if (indicatorValue <= 50) {
-            left += indicatorValue * (width * 4 / 6 / 200)
-        } else if (indicatorValue > 50 && indicatorValue <= 100) {
-            left += indicatorValue * (width * 4 / 6 / 200) + intervalValue
-        } else if (indicatorValue > 100 && indicatorValue <= 150) {
-            left += indicatorValue * (width * 4 / 6 / 200) + intervalValue * 2
-        } else if (indicatorValue > 150 && indicatorValue <= 200) {
-            left += indicatorValue * (width * 4 / 6 / 200) + intervalValue * 3
-        } else if (indicatorValue > 200 && indicatorValue <= 300) {
-            left += width * 4 / 6 + (indicatorValue - 200) * width / 6 / 100 + intervalValue * 4
-        } else {
-            left += width * 5 / 6 + (indicatorValue - 300) * width / 6 / 200 + intervalValue * 5
+        left += when {
+            indicatorValue <= 50 -> indicatorValue * (width * 4 / 6 / 200)
+            indicatorValue in 51..100 -> indicatorValue * (width * 4 / 6 / 200) + intervalValue
+            indicatorValue in 101..150 -> indicatorValue * (width * 4 / 6 / 200) + intervalValue * 2
+            indicatorValue in 151..200 -> indicatorValue * (width * 4 / 6 / 200) + intervalValue * 3
+            indicatorValue in 201..300 -> width * 4 / 6 + (indicatorValue - 200) * width / 6 / 100 + intervalValue * 4
+            else -> width * 5 / 6 + (indicatorValue - 300) * width / 6 / 200 + intervalValue * 5
         }
         canvas.drawBitmap(marker!!, (left - marker!!.width / 2 - 2).toFloat(), this.paddingTopInXML.toFloat(), paint)
     }
@@ -213,7 +199,6 @@ class IndicatorView(context: Context, attrs: AttributeSet) : LinearLayout(contex
      * 设置空气质量指示值
      */
     fun setIndicatorValue(indicatorValue: Int) {
-
         if (indicatorValue < 0)
             throw IllegalStateException("参数indicatorValue必须大于0")
 
@@ -221,24 +206,31 @@ class IndicatorView(context: Context, attrs: AttributeSet) : LinearLayout(contex
         if (indicatorValueChangeListener != null) {
             val stateDescription: String
             val indicatorTextColor: Int
-            if (indicatorValue <= 50) {
-                stateDescription = indicatorStrings!![0]
-                indicatorTextColor = indicatorColorIds[0]
-            } else if (indicatorValue > 50 && indicatorValue <= 100) {
-                stateDescription = indicatorStrings!![1]
-                indicatorTextColor = indicatorColorIds[1]
-            } else if (indicatorValue > 100 && indicatorValue <= 150) {
-                stateDescription = indicatorStrings!![2]
-                indicatorTextColor = indicatorColorIds[2]
-            } else if (indicatorValue > 150 && indicatorValue <= 200) {
-                stateDescription = indicatorStrings!![3]
-                indicatorTextColor = indicatorColorIds[3]
-            } else if (indicatorValue > 200 && indicatorValue <= 300) {
-                stateDescription = indicatorStrings!![4]
-                indicatorTextColor = indicatorColorIds[4]
-            } else {
-                stateDescription = indicatorStrings!![5]
-                indicatorTextColor = indicatorColorIds[5]
+            when {
+                indicatorValue <= 50 -> {
+                    stateDescription = indicatorStrings!![0]
+                    indicatorTextColor = indicatorColorIds[0]
+                }
+                indicatorValue in 51..100 -> {
+                    stateDescription = indicatorStrings!![1]
+                    indicatorTextColor = indicatorColorIds[1]
+                }
+                indicatorValue in 101..150 -> {
+                    stateDescription = indicatorStrings!![2]
+                    indicatorTextColor = indicatorColorIds[2]
+                }
+                indicatorValue in 151..200 -> {
+                    stateDescription = indicatorStrings!![3]
+                    indicatorTextColor = indicatorColorIds[3]
+                }
+                indicatorValue in 201..300 -> {
+                    stateDescription = indicatorStrings!![4]
+                    indicatorTextColor = indicatorColorIds[4]
+                }
+                else -> {
+                    stateDescription = indicatorStrings!![5]
+                    indicatorTextColor = indicatorColorIds[5]
+                }
             }
             marker!!.recycle()
             marker = drawableToBitmap(createVectorDrawable(markerId, indicatorTextColor))
@@ -248,29 +240,23 @@ class IndicatorView(context: Context, attrs: AttributeSet) : LinearLayout(contex
     }
 
     private fun createVectorDrawable(drawableId: Int, color: Int): Drawable {
-
         val vectorDrawableCompat = VectorDrawableCompat.create(resources, drawableId, context!!.theme)!!
         DrawableCompat.setTint(vectorDrawableCompat, color)
         DrawableCompat.setTintMode(vectorDrawableCompat, PorterDuff.Mode.SRC_IN)
-
         return vectorDrawableCompat
     }
 
     private fun drawableToBitmap(drawable: Drawable): Bitmap {
-        val bitmap: Bitmap
-
         if (drawable is BitmapDrawable) {
             if (drawable.bitmap != null) {
                 return drawable.bitmap
             }
         }
-
-        if (drawable.intrinsicWidth <= 0 || drawable.intrinsicHeight <= 0) {
-            bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888) // Single color bitmap will be created of 1x1 pixel
+        val bitmap = if (drawable.intrinsicWidth <= 0 || drawable.intrinsicHeight <= 0) {
+            Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888) // Single color bitmap will be created of 1x1 pixel
         } else {
-            bitmap = Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
+            Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
         }
-
         val canvas = Canvas(bitmap)
         drawable.setBounds(0, 0, canvas.width, canvas.height)
         drawable.draw(canvas)

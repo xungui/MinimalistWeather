@@ -6,7 +6,7 @@
     android:fitsSystemWindows="true"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.minimalist.weather.kotlin.view.SplashActivity">
+    tools:context="com.minimalist.weather.kotlin.feature.SplashActivity">
 
     <TextView
         android:layout_width="wrap_content"
