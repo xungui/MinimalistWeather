@@ -44,7 +44,6 @@ dependencies {
     implementation rootProject.ext.dependencies["dagger"]
     annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
     implementation rootProject.ext.dependencies["retrofit2-fastjson-converter"]
-
     api rootProject.ext.dependencies["support-v4"]
     api rootProject.ext.dependencies["appcompat-v7"]
     api rootProject.ext.dependencies["design"]
@@ -62,12 +61,9 @@ dependencies {
     api rootProject.ext.dependencies["adapter-rxjava"]
     api rootProject.ext.dependencies["fastjson"]
     api rootProject.ext.dependencies["okhttp3-logging-interceptor"]
-
     debugApi rootProject.ext.dependencies["stetho"]
     debugApi rootProject.ext.dependencies["stetho-okhttp3"]
-
     api rootProject.ext.dependencies["SmartRefreshLayout"]
     api rootProject.ext.dependencies["SmartRefreshHeader"]
-
     api 'org.glassfish:javax.annotation:10.0-b28'
 }

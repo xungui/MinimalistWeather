@@ -15,7 +15,7 @@ class WeatherApp : DaggerApplication() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        setupStrictMode()
+//        setupStrictMode()
         setupStetho()
     }
 

@@ -21,10 +21,10 @@ abstract class ActivityBindingModule {
 
     @ActivityScoped
     @ContributesAndroidInjector(modules = arrayOf(HomePageModule::class, DrawerMenuModule::class))
-    internal abstract fun mainActivity(): MainActivity
+    abstract fun mainActivity(): MainActivity
 
     @ActivityScoped
     @ContributesAndroidInjector(modules = arrayOf(SelectCityModule::class))
-    internal abstract fun selectCityActivity(): SelectCityActivity
+    abstract fun selectCityActivity(): SelectCityActivity
 
 }

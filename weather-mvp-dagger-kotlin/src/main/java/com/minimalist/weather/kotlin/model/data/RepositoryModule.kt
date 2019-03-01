@@ -19,50 +19,56 @@ abstract class RepositoryModule {
 
     @Singleton
     @Binds
-    internal abstract fun provideCityLocalDataSource(dataSource: CityLocalDataSource): CityDataSource
+    abstract fun provideCityLocalDataSource(dataSource: CityLocalDataSource): CityDataSource
 
     @Singleton
     @Binds
     @Local
-    internal abstract fun provideWeatherLocalDataSource(dataSource: WeatherLocalDataSource): WeatherDataSource
+    abstract fun provideWeatherLocalDataSource(dataSource: WeatherLocalDataSource): WeatherDataSource
 
     @Singleton
     @Binds
     @Remote
-    internal abstract fun provideWeatherRemoteDataSource(dataSource: WeatherRemoteDataSource): WeatherDataSource
+    abstract fun provideWeatherRemoteDataSource(dataSource: WeatherRemoteDataSource): WeatherDataSource
 
+    @Module
     companion object {
-        private val THREAD_COUNT = 3
+        private const val THREAD_COUNT = 3
 
+        @JvmStatic
         @Singleton
         @Provides
-        internal fun provideCityDb(context: Application): CityDatabase {
+        fun provideCityDb(context: Application): CityDatabase {
             return Room.databaseBuilder(context.applicationContext, CityDatabase::class.java, CityDatabase.DATABASE_NAME)
                     .build()
         }
 
+        @JvmStatic
         @Singleton
         @Provides
-        internal fun provideWeatherDb(context: Application): WeatherDatabase {
+        fun provideWeatherDb(context: Application): WeatherDatabase {
             return Room.databaseBuilder(context.applicationContext, WeatherDatabase::class.java, WeatherDatabase.DATABASE_NAME)
                     .build()
         }
 
+        @JvmStatic
         @Singleton
         @Provides
-        internal fun provideCityDao(db: CityDatabase): CityDao {
+        fun provideCityDao(db: CityDatabase): CityDao {
             return db.cityDao()
         }
 
+        @JvmStatic
         @Singleton
         @Provides
-        internal fun provideWeatherDao(db: WeatherDatabase): WeatherDao {
+        fun provideWeatherDao(db: WeatherDatabase): WeatherDao {
             return db.weatherDao()
         }
 
+        @JvmStatic
         @Singleton
         @Provides
-        internal fun provideAppExecutors(): AppExecutors {
+        fun provideAppExecutors(): AppExecutors {
             return AppExecutors(DiskIOThreadExecutor(),
                     Executors.newFixedThreadPool(THREAD_COUNT),
                     AppExecutors.MainThreadExecutor())
