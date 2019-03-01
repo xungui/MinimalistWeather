@@ -50,7 +50,7 @@
             - xxFragment.kt
             - xxModule.kt // 为这一组View-Presenter提供DI
             - xxPresenter.kt
-         -WelcomeActivity.kt     // 放在这里是为了便于查找应用程序入口
+         -SplashActivity.kt     // 放在这里是为了便于查找应用程序入口
     + main	  // 整个APP的的配置资源
         + stetho
         - WeatherApp.kt    // Application 类
