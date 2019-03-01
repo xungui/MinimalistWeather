@@ -53,7 +53,7 @@
          -WelcomeActivity.kt     // 放在这里是为了便于查找应用程序入口
     + main	  // 整个APP的的配置资源
         + stetho
-        - WeatherApp    // Application 类
+        - WeatherApp.kt    // Application 类
         - AppConstants.kt        // App 全局常量(如果有)
     + model //MVP 中所有 Model 层的数据处理都在这里
     + utils //APP使用的工具
