@@ -30,9 +30,9 @@
 * 代码混淆配置；
 * 如何快速开发一款结构清晰、可扩展性强的Android Application；
 
-## 二. 项目结构设计图
+## 二. 项目结构设计图（MVP）
 
-![架构设计图（MVP）](framework_minimalist_weather.png)
+![架构设计图](framework_minimalist_weather.png)
 
 ## 三. 项目包结构介绍
 
