@@ -34,7 +34,7 @@ class WeatherDataRepository : WeatherDataSource {
         weatherLocalDataSource.queryAllSaveCity(callback)
     }
 
-    override fun getWeather(cityId: String,forceRefresh: Boolean, callback: WeatherDataSource.LoadWeatherCallback) {
+    override fun getWeather(cityId: String, forceRefresh: Boolean, callback: WeatherDataSource.LoadWeatherCallback) {
         val weatherInCache = getWeatherWithId(cityId)
         //同一个小时内不会发布新的天气信息
         if (weatherInCache != null && isInFifteenMinute(weatherInCache) && !forceRefresh) {

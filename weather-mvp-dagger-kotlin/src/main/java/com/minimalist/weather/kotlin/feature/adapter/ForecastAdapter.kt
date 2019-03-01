@@ -11,8 +11,8 @@ import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.minimalist.weather.kotlin.R
-import com.minimalist.weather.kotlin.model.data.entity.weather.WeatherForecast
 import com.minimalist.weather.kotlin.feature.base.BaseRecyclerViewAdapter
+import com.minimalist.weather.kotlin.model.data.entity.weather.WeatherForecast
 
 class ForecastAdapter(private val weatherForecasts: List<WeatherForecast>?) : BaseRecyclerViewAdapter<ForecastAdapter.ViewHolder>() {
 
@@ -43,7 +43,7 @@ class ForecastAdapter(private val weatherForecasts: List<WeatherForecast>?) : Ba
         return weatherForecasts?.size ?: 0
     }
 
-      class ViewHolder(itemView: View, adapter: ForecastAdapter) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View, adapter: ForecastAdapter) : RecyclerView.ViewHolder(itemView) {
         @BindView(R.id.week_text_view)
         lateinit var weekTextView: TextView
         @BindView(R.id.date_text_view)

@@ -11,8 +11,8 @@ import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.minimalist.weather.kotlin.R
-import com.minimalist.weather.kotlin.model.data.entity.weather.LifeIndex
 import com.minimalist.weather.kotlin.feature.base.BaseRecyclerViewAdapter
+import com.minimalist.weather.kotlin.model.data.entity.weather.LifeIndex
 
 class LifeIndexAdapter(private val context: Context, private val indexList: List<LifeIndex>?) : BaseRecyclerViewAdapter<LifeIndexAdapter.ViewHolder>() {
 

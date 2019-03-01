@@ -8,7 +8,7 @@ abstract class BaseRecyclerViewAdapter<T : RecyclerView.ViewHolder> : RecyclerVi
 
 
     protected fun onItemHolderClick(itemHolder: RecyclerView.ViewHolder) {
-        onItemClickListener?.onItemClick( null, itemHolder.itemView,
+        onItemClickListener?.onItemClick(null, itemHolder.itemView,
                 itemHolder.adapterPosition, itemHolder.itemId)
     }
 

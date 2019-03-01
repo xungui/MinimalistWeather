@@ -4,13 +4,13 @@ package com.minimalist.weather.kotlin.feature.home
 import android.content.Context
 import android.widget.Toast
 import com.minimalist.weather.kotlin.di.ActivityScoped
+import com.minimalist.weather.kotlin.feature.contract.HomePageContract
 import com.minimalist.weather.kotlin.model.data.entity.weather.Weather
 import com.minimalist.weather.kotlin.model.data.source.WeatherDataRepository
 import com.minimalist.weather.kotlin.model.data.source.WeatherDataSource
 import com.minimalist.weather.kotlin.model.preference.PreferenceHelper
 import com.minimalist.weather.kotlin.model.preference.WeatherSettings
 import com.minimalist.weather.kotlin.utils.NetworkUtils
-import com.minimalist.weather.kotlin.feature.contract.HomePageContract
 import rx.subscriptions.CompositeSubscription
 import javax.inject.Inject
 

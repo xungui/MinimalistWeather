@@ -11,10 +11,10 @@ import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.minimalist.weather.kotlin.R
+import com.minimalist.weather.kotlin.feature.base.BaseRecyclerViewAdapter
 import com.minimalist.weather.kotlin.model.data.entity.weather.Weather
 import com.minimalist.weather.kotlin.utils.DateConvertUtils.DATA_FORMAT_PATTEN_YYYY_MM_DD_HH_MM
 import com.minimalist.weather.kotlin.utils.DateConvertUtils.timeStampToDate
-import com.minimalist.weather.kotlin.feature.base.BaseRecyclerViewAdapter
 
 /**
  * 城市管理页面Adapter

@@ -2,12 +2,12 @@ package com.minimalist.weather.kotlin.feature.home.drawer
 
 
 import com.minimalist.weather.kotlin.di.ActivityScoped
+import com.minimalist.weather.kotlin.feature.contract.DrawerContract
 import com.minimalist.weather.kotlin.model.data.entity.weather.Weather
 import com.minimalist.weather.kotlin.model.data.source.WeatherDataRepository
 import com.minimalist.weather.kotlin.model.data.source.WeatherDataSource
 import com.minimalist.weather.kotlin.model.preference.PreferenceHelper
 import com.minimalist.weather.kotlin.model.preference.WeatherSettings
-import com.minimalist.weather.kotlin.feature.contract.DrawerContract
 import rx.subscriptions.CompositeSubscription
 import java.io.InvalidClassException
 import javax.inject.Inject

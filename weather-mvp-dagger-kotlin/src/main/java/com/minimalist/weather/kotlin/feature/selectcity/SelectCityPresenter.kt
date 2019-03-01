@@ -1,10 +1,10 @@
 package com.minimalist.weather.kotlin.feature.selectcity
 
 import com.minimalist.weather.kotlin.di.ActivityScoped
+import com.minimalist.weather.kotlin.feature.contract.SelectCityContract
 import com.minimalist.weather.kotlin.model.data.entity.city.City
 import com.minimalist.weather.kotlin.model.data.source.CityDataRepository
 import com.minimalist.weather.kotlin.model.data.source.CityDataSource
-import com.minimalist.weather.kotlin.feature.contract.SelectCityContract
 import rx.subscriptions.CompositeSubscription
 import javax.inject.Inject
 

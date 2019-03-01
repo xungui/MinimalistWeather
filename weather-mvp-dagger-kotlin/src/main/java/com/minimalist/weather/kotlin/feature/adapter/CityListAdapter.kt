@@ -11,13 +11,13 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.annimon.stream.Stream
 import com.minimalist.weather.kotlin.R
-import com.minimalist.weather.kotlin.model.data.entity.city.City
 import com.minimalist.weather.kotlin.feature.base.BaseRecyclerViewAdapter
+import com.minimalist.weather.kotlin.model.data.entity.city.City
 import java.util.*
 
 class CityListAdapter(private val cities: List<City>) : BaseRecyclerViewAdapter<CityListAdapter.ViewHolder>(), Filterable {
     var mFilterData: List<City>? = null//过滤后的数据
-    private var filter: RecyclerViewFilter =  RecyclerViewFilter()
+    private var filter: RecyclerViewFilter = RecyclerViewFilter()
 
     init {
         mFilterData = cities
@@ -43,11 +43,11 @@ class CityListAdapter(private val cities: List<City>) : BaseRecyclerViewAdapter<
         return if (mFilterData == null) 0 else mFilterData!!.size
     }
 
-     class ViewHolder(itemView: View, cityListAdapter: CityListAdapter) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View, cityListAdapter: CityListAdapter) : RecyclerView.ViewHolder(itemView) {
         @BindView(R.id.city_name_text_view)
         lateinit var cityNameTextView: TextView
 
-         init {
+        init {
             ButterKnife.bind(this, itemView)
             itemView.setOnClickListener { cityListAdapter.onItemHolderClick(this) }
         }

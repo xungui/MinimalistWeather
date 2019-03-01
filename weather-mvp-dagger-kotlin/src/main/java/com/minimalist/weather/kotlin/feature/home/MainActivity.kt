@@ -17,12 +17,12 @@ import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.minimalist.weather.kotlin.R
+import com.minimalist.weather.kotlin.feature.base.BaseActivity
+import com.minimalist.weather.kotlin.feature.home.drawer.DrawerMenuFragment
+import com.minimalist.weather.kotlin.feature.home.drawer.DrawerMenuPresenter
 import com.minimalist.weather.kotlin.model.data.entity.weather.Weather
 import com.minimalist.weather.kotlin.utils.ActivityUtils
 import com.minimalist.weather.kotlin.utils.DateConvertUtils
-import com.minimalist.weather.kotlin.feature.home.drawer.DrawerMenuFragment
-import com.minimalist.weather.kotlin.feature.home.drawer.DrawerMenuPresenter
-import com.minimalist.weather.kotlin.feature.base.BaseActivity
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import javax.inject.Inject

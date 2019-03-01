@@ -18,11 +18,11 @@ import butterknife.OnClick
 import butterknife.Unbinder
 import com.minimalist.weather.kotlin.R
 import com.minimalist.weather.kotlin.di.ActivityScoped
-import com.minimalist.weather.kotlin.model.data.entity.weather.Weather
 import com.minimalist.weather.kotlin.feature.adapter.CityManagerAdapter
-import com.minimalist.weather.kotlin.feature.contract.DrawerContract
 import com.minimalist.weather.kotlin.feature.base.BaseFragment
+import com.minimalist.weather.kotlin.feature.contract.DrawerContract
 import com.minimalist.weather.kotlin.feature.selectcity.SelectCityActivity
+import com.minimalist.weather.kotlin.model.data.entity.weather.Weather
 import java.io.InvalidClassException
 import java.util.*
 import javax.inject.Inject

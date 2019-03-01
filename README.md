@@ -32,7 +32,7 @@
 
 ## 二. 项目结构设计图
 
-![架构设计图](framework_minimalist_weather.png)
+![架构设计图（MVP）](framework_minimalist_weather.png)
 
 ## 三. 项目包结构介绍
 
@@ -40,24 +40,33 @@
 
 ```Kotlin
 -com.minimalist.weather.kotlin
-    + di    //包含Dagger2依赖注入的唯一Component，完成对APP的DI工作
-    - feature       // 业务 feature，feature 内按页面划分，如果是大型项目可以按业务模块划分，对于特大型项目建议走模块化（组件化）方案，每个业务模块再按照 MinimalistWeather 的分包规则来分包
+    + di    //包含Dagger2依赖注入的唯一Component，统筹整个APP的DI工作
+    - feature   // 业务 feature，feature 内按页面划分，如果是大型项目可以按业务模块划分，对于特大型项目建议走模块化（组件化）方案，每个业务模块再按照 MinimalistWeather 的分包规则来分包
         + adapter   //各类循环视图的适配器
+        + base
         + contact   //View-Presenter 接口
         + home  //主页面
         - selectcity
-            - xxActivity.kt // Activity 作为全局的控制者，用来负责创建 View 和 Presenter 的实例
-            - xxFragment.kt
+            - xxActivity.kt // Activity 作为View-Presenter实现业务的基石，提供View层的生命周期控制
+            - xxFragment.kt //实现的View层View逻辑
             - xxModule.kt // 为这一组View-Presenter提供DI
-            - xxPresenter.kt
+            - xxPresenter.kt    //实现控制逻辑
          -SplashActivity.kt     // 放在这里是为了便于查找应用程序入口
-    + main	  // 整个APP的的配置资源
+    + main  // 整个APP的的配置资源
         + stetho
-        - WeatherApp.kt    // Application 类
-        - AppConstants.kt        // App 全局常量(如果有)
+        - WeatherApp.kt // Application 类
+        - AppConstants.kt   // App 全局常量(如果有)
     + model //MVP 中所有 Model 层的数据处理都在这里
+        + data
+            + entity //数据库表集合
+            + source //数据库实现
+            - Local.kt  //标注本地数据库的注解
+            - Remote.kt //标注远程数据库的注解
+            - RepositoryModule.kt   //给数据库提供DI
+        + http  //网络数据请求
+        + preference
     + utils //APP使用的工具
-    +widget //View的widget
+    + widget //view的widget
 ```
 
 ## 三. 开源许可 [![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)](https://www.apache.org/licenses/LICENSE-2.0)

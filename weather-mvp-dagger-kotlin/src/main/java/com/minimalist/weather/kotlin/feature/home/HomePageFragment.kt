@@ -19,15 +19,15 @@ import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.minimalist.weather.kotlin.R
 import com.minimalist.weather.kotlin.di.ActivityScoped
-import com.minimalist.weather.kotlin.model.WeatherDetail
-import com.minimalist.weather.kotlin.model.data.entity.weather.LifeIndex
-import com.minimalist.weather.kotlin.model.data.entity.weather.Weather
-import com.minimalist.weather.kotlin.model.data.entity.weather.WeatherForecast
 import com.minimalist.weather.kotlin.feature.adapter.DetailAdapter
 import com.minimalist.weather.kotlin.feature.adapter.ForecastAdapter
 import com.minimalist.weather.kotlin.feature.adapter.LifeIndexAdapter
+import com.minimalist.weather.kotlin.feature.adapter.entity.WeatherDetail
 import com.minimalist.weather.kotlin.feature.base.BaseFragment
 import com.minimalist.weather.kotlin.feature.contract.HomePageContract
+import com.minimalist.weather.kotlin.model.data.entity.weather.LifeIndex
+import com.minimalist.weather.kotlin.model.data.entity.weather.Weather
+import com.minimalist.weather.kotlin.model.data.entity.weather.WeatherForecast
 import com.minimalist.weather.kotlin.widget.IndicatorValueChangeListener
 import com.minimalist.weather.kotlin.widget.IndicatorView
 import java.util.*
@@ -134,7 +134,6 @@ class HomePageFragment @Inject constructor() : BaseFragment(), HomePageContract.
 
     @SuppressLint("SetTextI18n")
     override fun displayWeatherInformation(weather: Weather) {
-
         this.weather = weather
         onFragmentInteractionListener!!.updatePageTitle(weather)
 
@@ -160,7 +159,6 @@ class HomePageFragment @Inject constructor() : BaseFragment(), HomePageContract.
     }
 
     private fun createDetails(weather: Weather): List<WeatherDetail> {
-
         val details = ArrayList<WeatherDetail>()
         details.add(WeatherDetail(R.drawable.ic_index_sunscreen, "体感温度", weather.weatherLive!!.feelsTemperature!! + "°C"))
         details.add(WeatherDetail(R.drawable.ic_index_sunscreen, "湿度", weather.weatherLive!!.humidity!! + "%"))
@@ -193,5 +191,4 @@ class HomePageFragment @Inject constructor() : BaseFragment(), HomePageContract.
          */
         fun addOrUpdateCityListInDrawerMenu(weather: Weather)
     }
-
 }

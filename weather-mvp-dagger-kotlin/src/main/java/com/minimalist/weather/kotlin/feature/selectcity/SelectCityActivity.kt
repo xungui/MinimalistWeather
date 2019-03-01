@@ -10,8 +10,8 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.jakewharton.rxbinding.support.v7.widget.RxSearchView
 import com.minimalist.weather.kotlin.R
-import com.minimalist.weather.kotlin.utils.ActivityUtils
 import com.minimalist.weather.kotlin.feature.base.BaseActivity
+import com.minimalist.weather.kotlin.utils.ActivityUtils
 import rx.android.schedulers.AndroidSchedulers
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject

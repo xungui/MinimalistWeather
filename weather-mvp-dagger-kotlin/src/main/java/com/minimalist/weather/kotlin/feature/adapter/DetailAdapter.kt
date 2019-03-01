@@ -9,7 +9,7 @@ import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.minimalist.weather.kotlin.R
-import com.minimalist.weather.kotlin.model.WeatherDetail
+import com.minimalist.weather.kotlin.feature.adapter.entity.WeatherDetail
 import com.minimalist.weather.kotlin.feature.base.BaseRecyclerViewAdapter
 
 class DetailAdapter(private val details: List<WeatherDetail>?) : BaseRecyclerViewAdapter<DetailAdapter.ViewHolder>() {
@@ -22,16 +22,16 @@ class DetailAdapter(private val details: List<WeatherDetail>?) : BaseRecyclerVie
 
     override fun onBindViewHolder(holder: DetailAdapter.ViewHolder, position: Int) {
         val detail = details!![position]
-        holder.detailIconImageView!!.setImageResource(detail.iconResourceId)
-        holder.detailKeyTextView!!.text = detail.key
-        holder.detailValueTextView!!.text = detail.value
+        holder.detailIconImageView.setImageResource(detail.iconResourceId)
+        holder.detailKeyTextView.text = detail.key
+        holder.detailValueTextView.text = detail.value
     }
 
     override fun getItemCount(): Int {
         return details?.size ?: 0
     }
 
-      class ViewHolder(itemView: View, adapter: DetailAdapter) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View, adapter: DetailAdapter) : RecyclerView.ViewHolder(itemView) {
         @BindView(R.id.detail_icon_image_view)
         lateinit var detailIconImageView: ImageView
         @BindView(R.id.detail_key_text_view)

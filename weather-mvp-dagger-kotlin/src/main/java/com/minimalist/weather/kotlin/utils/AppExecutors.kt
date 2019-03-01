@@ -19,7 +19,7 @@ open class AppExecutors constructor(
         val mainThread: Executor = MainThreadExecutor()
 ) {
 
-     class MainThreadExecutor : Executor {
+    class MainThreadExecutor : Executor {
         private val mainThreadHandler = Handler(Looper.getMainLooper())
 
         override fun execute(command: Runnable) {
