@@ -36,7 +36,7 @@ class CityListAdapter(private val cities: List<City>) : BaseRecyclerViewAdapter<
         if (cityName != parentName) {
             cityName = "$parentName.$cityName"
         }
-        holder.cityNameTextView!!.text = cityName
+        holder.cityNameTextView.text = cityName
     }
 
     override fun getItemCount(): Int {
@@ -63,7 +63,7 @@ class CityListAdapter(private val cities: List<City>) : BaseRecyclerViewAdapter<
             //返回的results即为过滤后的ArrayList<City>
             val results = Filter.FilterResults()
             //无约束字符串则返回null
-            if (charSequence == null || charSequence.length == 0) {
+            if (charSequence == null || charSequence.isEmpty()) {
                 results.values = null
                 results.count = 0
             } else {
