@@ -1,6 +1,7 @@
 package com.baronzhang.android.weather.feature.adapter;
 
 import android.annotation.SuppressLint;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -29,8 +30,9 @@ public class ForecastAdapter extends BaseRecyclerViewAdapter<ForecastAdapter.Vie
         this.weatherForecasts = weatherForecasts;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_forecast, parent, false);
         return new ViewHolder(itemView, this);
@@ -38,7 +40,7 @@ public class ForecastAdapter extends BaseRecyclerViewAdapter<ForecastAdapter.Vie
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(ForecastAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ForecastAdapter.ViewHolder holder, int position) {
         WeatherForecast weatherForecast = weatherForecasts.get(position);
         holder.weekTextView.setText(weatherForecast.getWeek());
         holder.dateTextView.setText(weatherForecast.getDate());

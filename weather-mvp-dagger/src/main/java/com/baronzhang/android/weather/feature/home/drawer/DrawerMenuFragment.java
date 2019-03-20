@@ -3,6 +3,7 @@ package com.baronzhang.android.weather.feature.home.drawer;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,9 +14,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 
+import com.baronzhang.android.weather.R;
 import com.baronzhang.android.weather.feature.contract.DrawerContract;
 import com.baronzhang.android.weather.feature.main.BaseFragment;
-import com.baronzhang.android.weather.R;
 import com.baronzhang.android.weather.feature.selectcity.SelectCityActivity;
 import com.baronzhang.android.weather.model.db.entities.minimalist.Weather;
 
@@ -74,7 +75,7 @@ public class DrawerMenuFragment extends BaseFragment implements DrawerContract.V
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_drawer_menu, container, false);
         unbinder = ButterKnife.bind(this, rootView);

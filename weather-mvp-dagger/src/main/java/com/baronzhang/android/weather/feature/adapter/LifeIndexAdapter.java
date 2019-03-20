@@ -2,6 +2,7 @@ package com.baronzhang.android.weather.feature.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,15 +34,16 @@ public class LifeIndexAdapter extends BaseRecyclerViewAdapter<LifeIndexAdapter.V
         this.indexList = indexList;
     }
 
+    @NonNull
     @Override
-    public LifeIndexAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public LifeIndexAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_life_index, parent, false);
         return new ViewHolder(itemView, this);
     }
 
     @Override
-    public void onBindViewHolder(LifeIndexAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull LifeIndexAdapter.ViewHolder holder, int position) {
         LifeIndex index = indexList.get(position);
         holder.indexIconImageView.setImageDrawable(getIndexDrawable(context, index.getName()));
         holder.indexLevelTextView.setText(index.getIndex());

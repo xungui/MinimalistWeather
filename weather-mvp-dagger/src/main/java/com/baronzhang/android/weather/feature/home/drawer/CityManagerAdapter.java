@@ -1,5 +1,6 @@
 package com.baronzhang.android.weather.feature.home.drawer;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,15 +32,16 @@ public class CityManagerAdapter extends BaseRecyclerViewAdapter<CityManagerAdapt
         this.weatherList = weatherList;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_city_manager, parent, false);
         return new ViewHolder(itemView, this);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         Weather weather = weatherList.get(position);
         holder.city.setText(weather.getCityName());
         holder.weather.setText(weather.getWeatherLive().getWeather());

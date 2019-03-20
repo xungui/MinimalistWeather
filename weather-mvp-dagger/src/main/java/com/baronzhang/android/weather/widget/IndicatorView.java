@@ -169,6 +169,8 @@ public class IndicatorView extends LinearLayout {
             case MeasureSpec.UNSPECIFIED:
                 indicatorViewWidth = desiredWidth;
                 break;
+            default:
+                break;
         }
 
         //测量高度

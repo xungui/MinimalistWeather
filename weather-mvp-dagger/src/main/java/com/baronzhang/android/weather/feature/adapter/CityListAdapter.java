@@ -1,5 +1,6 @@
 package com.baronzhang.android.weather.feature.adapter;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,14 +35,14 @@ public class CityListAdapter extends BaseRecyclerViewAdapter<CityListAdapter.Vie
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_city, parent, false);
         return new ViewHolder(itemView, this);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         City city = mFilterData.get(position);
         String cityName = city.getCityName();
         String parentName = city.getParent();

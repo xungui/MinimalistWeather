@@ -19,7 +19,7 @@ import java.sql.SQLException;
 
 /**
  * @author baronzhang (baron[dot]zhanglei[at]gmail[dot]com)
- *         16/3/13
+ * 16/3/13
  */
 public final class CityDatabaseHelper extends OrmLiteSqliteOpenHelper {
     private static final String TAG = "CityDatabaseHelper";
@@ -81,25 +81,36 @@ public final class CityDatabaseHelper extends OrmLiteSqliteOpenHelper {
 
         // 判断保持城市的数据库文件是否存在
         File file = new File(WeatherApplication.getInstance().getDatabasePath(DATABASE_NAME).getAbsolutePath());
-        if (!file.exists()) {// 如果不存在，则导入数据库文件
-            //数据库文件
-            File dbFile = WeatherApplication.getInstance().getDatabasePath(DATABASE_NAME);
-            try {
-                if (!dbFile.getParentFile().exists()) {
-                    dbFile.getParentFile().mkdir();
-                }
-                if (!dbFile.exists()) {
-                    dbFile.createNewFile();
-                }
-                //加载欲导入的数据库
-                InputStream is = WeatherApplication.getInstance().getResources().openRawResource(R.raw.city);
-                FileOutputStream fos = new FileOutputStream(dbFile);
-                byte[] buffer = new byte[is.available()];
-                is.read(buffer);
-                fos.write(buffer);
-                is.close();
-                fos.close();
+        if (file.exists()) {// 如果不存在，则导入数据库文件
+            return;
+        }
+        File dbFile = WeatherApplication.getInstance().getDatabasePath(DATABASE_NAME);  //数据库文件
+        InputStream is = null;
+        FileOutputStream fos = null;
+        try {
+            if (!dbFile.getParentFile().exists()) {
+                dbFile.getParentFile().mkdir();
+            }
+            if (!dbFile.exists()) {
+                dbFile.createNewFile();
+            }
+            //加载欲导入的数据库
+            is = WeatherApplication.getInstance().getResources().openRawResource(R.raw.city);
+            fos = new FileOutputStream(dbFile);
+            byte[] buffer = new byte[is.available()];
+            is.read(buffer);
+            fos.write(buffer);
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                fos.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }

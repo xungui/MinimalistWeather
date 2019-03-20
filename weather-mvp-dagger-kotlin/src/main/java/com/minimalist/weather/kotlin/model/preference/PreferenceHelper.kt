@@ -10,7 +10,7 @@ import java.util.*
 
 class PreferenceHelper private constructor() {
     companion object {
-        private val TAG = "Preferences"
+        private const val TAG = "Preferences"
         private val SETTINGS_FILENAME = WeatherApp::class.java.getPackage()!!.name
         private val CONFIGURATION_LISTENERS = Collections.synchronizedList(ArrayList<ConfigurationListener>())
 

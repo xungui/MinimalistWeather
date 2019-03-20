@@ -26,10 +26,10 @@ internal class FlymeHelper : SystemHelper {
                 flymeFlags.isAccessible = true
                 val bit = darkFlag.getInt(null)
                 var value = flymeFlags.getInt(lp)
-                if (isFontColorDark) {
-                    value = value or bit
+                value = if (isFontColorDark) {
+                    value or bit
                 } else {
-                    value = value and bit.inv()
+                    value and bit.inv()
                 }
                 flymeFlags.setInt(lp, value)
                 window.attributes = lp

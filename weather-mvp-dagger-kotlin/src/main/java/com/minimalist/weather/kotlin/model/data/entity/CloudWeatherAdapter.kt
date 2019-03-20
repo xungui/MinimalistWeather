@@ -154,20 +154,14 @@ class CloudWeatherAdapter(private val cloudWeatherLive: EnvironmentCloudWeatherL
         }
 
     private fun getAqiQuality(aqi: Int): String {
-        return if (aqi <= 50) {
-            "优"
-        } else if (aqi <= 100) {
-            "良"
-        } else if (aqi <= 150) {
-            "轻度污染"
-        } else if (aqi <= 200) {
-            "中度污染"
-        } else if (aqi <= 300) {
-            "重度污染"
-        } else if (aqi < 500) {
-            "严重污染"
-        } else {
-            "污染爆表"
+        return when {
+            aqi <= 50 -> "优"
+            aqi <= 100 -> "良"
+            aqi <= 150 -> "轻度污染"
+            aqi <= 200 -> "中度污染"
+            aqi <= 300 -> "重度污染"
+            aqi < 500 -> "严重污染"
+            else -> "污染爆表"
         }
     }
 

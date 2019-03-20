@@ -1,5 +1,6 @@
 package com.baronzhang.android.weather.feature.adapter;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,15 +27,16 @@ public class DetailAdapter extends BaseRecyclerViewAdapter<DetailAdapter.ViewHol
         this.details = details;
     }
 
+    @NonNull
     @Override
-    public DetailAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public DetailAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_detail, parent, false);
         return new ViewHolder(itemView, this);
     }
 
     @Override
-    public void onBindViewHolder(DetailAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DetailAdapter.ViewHolder holder, int position) {
         WeatherDetail detail = details.get(position);
         holder.detailIconImageView.setImageResource(detail.getIconResourceId());
         holder.detailKeyTextView.setText(detail.getKey());

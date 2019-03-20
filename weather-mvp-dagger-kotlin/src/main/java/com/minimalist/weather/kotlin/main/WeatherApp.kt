@@ -15,8 +15,10 @@ class WeatherApp : DaggerApplication() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-//        setupStrictMode()
-        setupStetho()
+        Thread(Runnable {
+            setupStrictMode()
+            setupStetho()
+        })
     }
 
     private fun setupStrictMode() {
@@ -40,7 +42,7 @@ class WeatherApp : DaggerApplication() {
     }
 
     companion object {
-        private val TAG = "WeatherApp"
+        private const val TAG = "WeatherApp"
         lateinit var instance: WeatherApp
             private set
     }
